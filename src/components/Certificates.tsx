@@ -38,7 +38,7 @@ export const Certificates = ({ byCategory, microsoftStudies = [] }: Certificates
         {/* CERTIFICACIONES POR CATEGORÍA */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold mb-8 text-gray-900">Certificaciones Profesionales</h3>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4 auto-rows-fr">
             {Object.entries(categories).map(([category, certs]) => (
               <div
                 key={category}

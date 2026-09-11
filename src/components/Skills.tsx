@@ -8,7 +8,7 @@ const SkillCard = ({ category, items }: SkillCategoryProps) => {
   const skillsList = items.split(',').map(item => item.trim())
   
   return (
-    <div className="min-h-64 border-2 border-blue-200 rounded-lg p-6 bg-gradient-to-br from-blue-50 to-white hover:shadow-lg transition-shadow duration-300 flex flex-col">
+    <div className="h-80 border-2 border-blue-200 rounded-lg p-6 bg-gradient-to-br from-blue-50 to-white hover:shadow-lg transition-shadow duration-300 flex flex-col">
       <h4 className="text-lg font-bold mb-4 text-blue-700 flex-shrink-0">{category}</h4>
       <div className="space-y-2 flex-1 overflow-y-auto scrollbar-hide">
         {skillsList.map((item, i) => (

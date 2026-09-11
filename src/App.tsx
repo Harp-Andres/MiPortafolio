@@ -6,6 +6,7 @@ import {
   Skills,
   Experience,
   Education,
+  Certificates,
   Footer,
 } from './components'
 import { CV_DATA } from './utils/cv-data'
@@ -40,15 +41,16 @@ function App() {
         <Hero name={CV_DATA.name} title={CV_DATA.title} />
         <About
           email={CV_DATA.email}
-          phone={CV_DATA.phone}
+          phone={`${CV_DATA.phone1} - ${CV_DATA.phone2}`}
           location={CV_DATA.location}
           linkedin={CV_DATA.linkedin}
           birthDate={CV_DATA.birthDate}
-          about={CV_DATA.about}
+          about={CV_DATA.profile}
         />
         <Skills categories={CV_DATA.skills} />
         <Experience items={CV_DATA.experience} />
         <Education items={CV_DATA.education} />
+        <Certificates items={CV_DATA.certificates} microsoftStudies={CV_DATA.microsoftStudies} />
       </main>
 
       <Footer />

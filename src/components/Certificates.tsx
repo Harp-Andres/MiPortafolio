@@ -13,10 +13,9 @@ interface CertificatesProps {
   items?: string[]
   byCategory?: CertificateCategory
   officialCertifications?: OfficialCertification[]
-  microsoftStudies?: string[]
 }
 
-export const Certificates = ({ byCategory, officialCertifications = [], microsoftStudies = [] }: CertificatesProps) => {
+export const Certificates = ({ byCategory, officialCertifications = [] }: CertificatesProps) => {
   const categories = byCategory || {}
   const categoryColors: { [key: string]: string } = {
     'DevOps & Cloud': 'border-orange-500 bg-orange-50',

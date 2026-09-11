@@ -53,8 +53,7 @@ function App() {
         <Certificates 
           byCategory={CV_DATA.certificatesByCategory}
           officialCertifications={CV_DATA.officialCertifications}
-          items={CV_DATA.certificates} 
-          microsoftStudies={CV_DATA.microsoftStudies} 
+          items={CV_DATA.certificates}
         />
       </main>
 

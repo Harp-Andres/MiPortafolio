@@ -14,7 +14,7 @@ export const CV_DATA = {
 
   skills: [
     { category: 'Mobile Automation', items: 'Appium, Appium Server, Appium Inspector, Android/iOS, ADB' },
-    { category: 'Web Automation', items: 'Selenium WebDriver, Playwright, Cypress, HTML, CSS' },
+    { category: 'Web Automation', items: 'Selenium WebDriver, Playwright, Cypress, Serenity BDD, HTML, CSS' },
     { category: 'API / Backend Testing', items: 'REST Assured, Karate, Postman, SoapUI, Swagger, validación de contratos, pruebas de integración' },
     { category: 'Performance', items: 'JMeter, Gatling (básico)' },
     { category: 'BDD / Frameworks', items: 'Cucumber, Reqnroll (.NET), Serenity BDD, JUnit, TestNG, Katalon Studio' },

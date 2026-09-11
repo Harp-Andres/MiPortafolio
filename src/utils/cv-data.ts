@@ -96,7 +96,7 @@ export const CV_DATA = {
       'DevOps y Cloud con Azure DevOps, App Service Pipelines y Git — Udemy',
       'Docker Compose with Selenium — Udemy',
       'La Guía de Jenkins: De Cero a Experto — Udemy',
-      'Linux Essentials — LPI (Certificación internacional)',
+      'Linux Essentials — LPI',
     ],
     'Calidad & QA': [
       'ISTQB Certified Tester Foundation Level (CTFL 4.0) — Udemy',
@@ -123,6 +123,9 @@ export const CV_DATA = {
       'AI Fluency: Framework & Foundations — Anthropic',
       'Introduction to Claude Cowork — Anthropic',
       'Claude 101 — Anthropic',
+      'Escriba indicaciones eficaces para lograr resultados óptimos — Microsoft',
+      'Introducción a Microsoft Copilot Studio — Microsoft',
+      'Introducción a Microsoft 365 Copilot Chat (básico) — Microsoft',
     ],
     'Programación & Desarrollo': [
       'JavaScript — Cymetria Group',
@@ -155,6 +158,7 @@ export const CV_DATA = {
     'Selenium Essential Training — LinkedIn Learning',
   ],
 
+  // Estudios Microsoft (redundante con IA & Productividad, pero mantenido para retrocompatibilidad)
   microsoftStudies: [
     'Escriba indicaciones eficaces para lograr resultados óptimos — Microsoft',
     'Introducción a Microsoft Copilot Studio — Microsoft',

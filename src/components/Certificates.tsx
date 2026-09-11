@@ -60,27 +60,6 @@ export const Certificates = ({ byCategory, microsoftStudies = [] }: Certificates
             ))}
           </div>
         </div>
-
-        {/* ESTUDIOS MICROSOFT */}
-        {microsoftStudies.length > 0 && (
-          <div>
-            <h3 className="text-2xl font-bold mb-8 text-gray-900">Capacitación Microsoft</h3>
-            <div className="border-l-4 border-green-500 bg-green-50 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">📚</span>
-                <h4 className="text-lg font-bold text-gray-900">Microsoft Learning</h4>
-              </div>
-              <ul className="space-y-3">
-                {microsoftStudies.map((study, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <span className="text-green-600 font-bold mt-1">•</span>
-                    <span className="text-gray-700">{study}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   )

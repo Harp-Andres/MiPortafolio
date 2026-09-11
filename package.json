@@ -1,0 +1,46 @@
+{
+  "name": "miportafolio",
+  "version": "1.0.0",
+  "description": "Mi Portafolio",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "lint": "tsc --noEmit",
+    "generate:cv": "node scripts/hv/generate-cv.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harp-Andres/MiPortafolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harp-Andres/MiPortafolio/issues"
+  },
+  "homepage": "https://github.com/Harp-Andres/MiPortafolio#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.20.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.5.6",
+    "axios": "^1.20.0",
+    "docx": "^9.7.1",
+    "lucide-react": "^1.45.0",
+    "postcss": "^8.5.28",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^4.0.0",
+    "terser": "^5.51.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}

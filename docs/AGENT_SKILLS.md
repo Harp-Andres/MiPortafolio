@@ -458,6 +458,201 @@ npm run preview
 
 ---
 
+## Skill 11: GitHub Repository Configuration (API Segura)
+
+### Cuando usar
+- Cambiar rama default del repositorio
+- Ejecutar operaciones GitHub que requieren autenticación
+- Usar credenciales almacenadas de forma segura
+
+### 🔒 Mejor Práctica: Uso Seguro de Variables Cifradas
+
+**Prerequisito:** Token debe estar guardado en variable de entorno cifrada (ej: `TokenGit`)
+
+#### Paso 1️⃣: Descodificar token de forma segura (WINDOWS DPAPI)
+
+```powershell
+# Traer token cifrado desde variable de entorno
+$SecretoGuardado = [Environment]::GetEnvironmentVariable("TokenGit", "User")
+
+if ($null -eq $SecretoGuardado) {
+    Write-Host "✗ Variable TokenGit no encontrada" -ForegroundColor Red
+    exit 1
+}
+
+# Descifrarlo usando Windows DPAPI (criptografía del sistema)
+$BTP = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR(($SecretoGuardado | ConvertTo-SecureString))
+$TokenDescodificado = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BTP)
+
+# CRÍTICO: Limpiar memoria después de usar
+[System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BTP)
+```
+
+**¿Por qué DPAPI es seguro?**
+- ✅ Cifrado con credenciales del usuario de Windows
+- ✅ Solo el usuario que cifró puede descifrarlo
+- ✅ No se expone en texto plano en archivos
+- ✅ Protegido a nivel de sistema operativo
+
+#### Paso 2️⃣: Usar token con GitHub API (Sin exponerlo)
+
+```powershell
+# Usar token en headers sin mostrar en pantalla
+$headers = @{
+    "Authorization" = "Bearer $TokenDescodificado"  # ← No mostrar este valor
+    "Accept" = "application/vnd.github+json"
+    "X-GitHub-Api-Version" = "2022-11-28"
+}
+
+# Hacer petición segura
+$body = @{"default_branch" = "main"} | ConvertTo-Json
+
+try {
+    $response = Invoke-WebRequest -Uri "https://api.github.com/repos/Harp-Andres/MiPortafolio" `
+        -Method PATCH `
+        -Headers $headers `
+        -Body $body `
+        -ContentType "application/json"
+    
+    Write-Host "✓ Exitoso!" -ForegroundColor Green
+} catch {
+    Write-Host "✗ Error: $($_.Exception.Message)" -ForegroundColor Red
+}
+```
+
+#### Paso 3️⃣: Limpiar credenciales de memoria (CRÍTICO)
+
+```powershell
+# Eliminar token de memoria inmediatamente después de usarlo
+$TokenDescodificado = $null
+$SecretoGuardado = $null
+$headers = $null
+
+[System.GC]::Collect()  # Forzar garbage collection
+Write-Host "✓ Credenciales limpiadas de memoria" -ForegroundColor Yellow
+```
+
+### 📋 Script Completo Seguro
+
+```powershell
+# SEGURIDAD: No incluir tokens en scripts
+# USAR: Variables cifradas con DPAPI
+
+function Invoke-GitHubAPI {
+    param(
+        [string]$Method = "GET",
+        [string]$Endpoint,
+        [hashtable]$Body = @{}
+    )
+    
+    # 1. Descodificar token de forma segura
+    $SecretoGuardado = [Environment]::GetEnvironmentVariable("TokenGit", "User")
+    if ($null -eq $SecretoGuardado) {
+        throw "Variable TokenGit no encontrada"
+    }
+    
+    $BTP = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR(($SecretoGuardado | ConvertTo-SecureString))
+    $TokenDescodificado = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BTP)
+    [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BTP)
+    
+    try {
+        # 2. Hacer llamada API
+        $headers = @{
+            "Authorization" = "Bearer $TokenDescodificado"
+            "Accept" = "application/vnd.github+json"
+            "X-GitHub-Api-Version" = "2022-11-28"
+        }
+        
+        $params = @{
+            Uri = $Endpoint
+            Method = $Method
+            Headers = $headers
+            ContentType = "application/json"
+        }
+        
+        if ($Body.Count -gt 0) {
+            $params["Body"] = $Body | ConvertTo-Json
+        }
+        
+        return Invoke-WebRequest @params
+    }
+    finally {
+        # 3. Limpiar credenciales (aunque haya error)
+        $TokenDescodificado = $null
+        $SecretoGuardado = $null
+        [System.GC]::Collect()
+    }
+}
+
+# USO:
+$response = Invoke-GitHubAPI `
+    -Method PATCH `
+    -Endpoint "https://api.github.com/repos/Harp-Andres/MiPortafolio" `
+    -Body @{"default_branch" = "main"}
+
+Write-Host "✓ Respuesta: $($response.StatusCode)" -ForegroundColor Green
+```
+
+### 🛡️ Checklist de Seguridad
+
+```
+✅ Token almacenado CIFRADO (no en scripts)
+✅ Descifrarlo solo cuando se use
+✅ Usar en headers sin mostrarlo en pantalla
+✅ Limpiar de memoria INMEDIATAMENTE después
+✅ No loguear credenciales nunca
+✅ Usar try/finally para garantizar limpieza
+✅ DPAPI para cifrado a nivel Windows
+✅ Verificar que variable de entorno existe antes de usar
+```
+
+### ⚠️ QUÉ NO HACER (Inseguro)
+
+```powershell
+# ❌ NUNCA: Token en texto plano
+$token = "ghp_abc123..."
+
+# ❌ NUNCA: Token en logs o pantalla
+Write-Host "Mi token es: $token"
+
+# ❌ NUNCA: Guardar en archivo sin cifrado
+"token=$token" | Out-File token.txt
+
+# ❌ NUNCA: Dejar token en memoria
+# (No limpiar $TokenDescodificado)
+
+# ❌ NUNCA: Compartir variable de entorno
+# (Usar scopes locales)
+```
+
+### 🔐 Validación de Seguridad
+
+```powershell
+# Verificar que token está cifrado (no en texto plano)
+$raw = [Environment]::GetEnvironmentVariable("TokenGit", "User")
+if ($raw.StartsWith("01000000")) {
+    Write-Host "✓ Token está cifrado correctamente" -ForegroundColor Green
+} else {
+    Write-Host "✗ Token NO está cifrado!" -ForegroundColor Red
+}
+```
+
+### Troubleshooting
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Variable TokenGit no encontrada" | Var no existe | Crear con `[Environment]::SetEnvironmentVariable("TokenGit", $cifrado, "User")` |
+| 401 Unauthorized | Token inválido/expirado | Regenerar en https://github.com/settings/tokens |
+| "Cannot convert value to SecureString" | Token no está cifrado | Cifrar primero con `ConvertTo-SecureString` |
+| Access denied (403) | Permisos insuficientes | Token necesita scope `repo` en GitHub |
+
+### Referencias Seguridad
+- Microsoft DPAPI: https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.protecteddata
+- GitHub Token Security: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+- PowerShell Credential Management: https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/11-working-with-wmi
+
+---
+
 ## Matriz de Decisión: Cuál Skill Usar
 
 | Situación | Skill | Acción |
@@ -472,8 +667,9 @@ npm run preview
 | Validar visualmente | #8 Browser | Playwright screenshots |
 | Testing mobile | #9 Responsive | DevTools viewport |
 | Generar producción | #10 Build | `npm run build` |
+| Cambiar rama default | #11 Config | GitHub API + PowerShell script |
 
 ---
 
 **Última actualización:** 2026-09-11  
-**Versión:** 1.0 - MVP Complete
+**Versión:** 1.1 - Con GitHub Repository Configuration

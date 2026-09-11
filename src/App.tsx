@@ -50,7 +50,11 @@ function App() {
         <Skills categories={CV_DATA.skills} />
         <Experience items={CV_DATA.experience} />
         <Education items={CV_DATA.education} />
-        <Certificates items={CV_DATA.certificates} microsoftStudies={CV_DATA.microsoftStudies} />
+        <Certificates 
+          byCategory={CV_DATA.certificatesByCategory} 
+          items={CV_DATA.certificates} 
+          microsoftStudies={CV_DATA.microsoftStudies} 
+        />
       </main>
 
       <Footer />

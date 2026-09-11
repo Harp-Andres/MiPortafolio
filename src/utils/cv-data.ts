@@ -90,6 +90,46 @@ export const CV_DATA = {
     { degree: 'Tecnólogo en Gestión de Redes de Datos', institution: 'SENA', year: '2018' },
   ],
 
+  // Certificaciones organizadas por categoría
+  certificatesByCategory: {
+    'DevOps & Cloud': [
+      'DevOps y Cloud con Azure DevOps, App Service Pipelines y Git — Udemy',
+      'Docker Compose with Selenium — Udemy',
+      'La Guía de Jenkins: De Cero a Experto — Udemy',
+      'Linux Essentials — LPI (Certificación internacional)',
+    ],
+    'Calidad & QA': [
+      'ISTQB Certified Tester Foundation Level (CTFL 4.0) — Udemy',
+      'Scrum Practitioner — CertMind',
+      'Master: Pruebas de Rendimiento con Apache JMeter — Udemy',
+      'Introducción a Automatización de Pruebas con Puppeteer — Platzi',
+    ],
+    'Automatización Web & Mobile': [
+      'Selenium WebDriver y Grid — Udemy',
+      'Selenium Essential Training — LinkedIn Learning',
+      'Master Class de Appium 2 con Java — Udemy',
+      'Configuración básica con Appium+Serenity — Udemy',
+      'Cypress: Master en Automatización Test QA — Udemy',
+    ],
+    'Playwright & API Testing': [
+      'Automatización de Pruebas API Rest con Playwright — Udemy',
+      'Curso de Playwright con JavaScript — Udemy',
+      'Dominando Playwright con TypeScript: E2E Testing moderno — Udemy',
+    ],
+    'Otros Frameworks & Herramientas': [
+      'Master: Katalon Studio Test QA Automation — Udemy',
+    ],
+    'IA & Productividad': [
+      'AI Fluency: Framework & Foundations — Anthropic',
+      'Introduction to Claude Cowork — Anthropic',
+      'Claude 101 — Anthropic',
+    ],
+    'Programación & Desarrollo': [
+      'JavaScript — Cymetria Group',
+      'Programa Oracle Next Education (7 formaciones) — Oracle + Alura',
+    ],
+  },
+
   certificates: [
     'AI Fluency: Framework & Foundations — Anthropic',
     'Introduction to Claude Cowork — Anthropic',

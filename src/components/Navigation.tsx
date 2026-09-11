@@ -1,6 +1,7 @@
-import { Menu, X, Download } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useScrollPosition } from '../hooks'
+import { CVDownloads } from './CVDownloads'
 
 interface NavProps {
   onDownloadATS: () => void
@@ -47,24 +48,9 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
             ))}
           </div>
 
-          {/* Download Buttons Desktop */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <button
-              onClick={onDownloadATS}
-              className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded hover:bg-gray-200 transition-colors"
-              title="Descargar CV en formato ATS"
-            >
-              <Download size={18} />
-              <span className="text-sm">ATS</span>
-            </button>
-            <button
-              onClick={onDownloadVisual}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-              title="Descargar CV Visual"
-            >
-              <Download size={18} />
-              <span className="text-sm">Visual</span>
-            </button>
+          {/* Download Button Desktop - using CVDownloads component */}
+          <div className="hidden lg:flex items-center">
+            <CVDownloads onDownloadATS={onDownloadATS} onDownloadVisual={onDownloadVisual} />
           </div>
 
           {/* Mobile menu button */}
@@ -92,27 +78,8 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
                   {link.label}
                 </a>
               ))}
-              <div className="flex gap-2 pt-4 px-3">
-                <button
-                  onClick={() => {
-                    onDownloadATS()
-                    setIsOpen(false)
-                  }}
-                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-white text-black rounded hover:bg-gray-200 transition-colors text-sm"
-                >
-                  <Download size={16} />
-                  ATS
-                </button>
-                <button
-                  onClick={() => {
-                    onDownloadVisual()
-                    setIsOpen(false)
-                  }}
-                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm"
-                >
-                  <Download size={16} />
-                  Visual
-                </button>
+              <div className="pt-4 px-3">
+                <CVDownloads onDownloadATS={onDownloadATS} onDownloadVisual={onDownloadVisual} />
               </div>
             </div>
           </div>

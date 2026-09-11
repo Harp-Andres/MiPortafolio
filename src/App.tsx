@@ -51,7 +51,8 @@ function App() {
         <Experience items={CV_DATA.experience} />
         <Education items={CV_DATA.education} />
         <Certificates 
-          byCategory={CV_DATA.certificatesByCategory} 
+          byCategory={CV_DATA.certificatesByCategory}
+          officialCertifications={CV_DATA.officialCertifications}
           items={CV_DATA.certificates} 
           microsoftStudies={CV_DATA.microsoftStudies} 
         />

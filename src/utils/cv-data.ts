@@ -90,17 +90,21 @@ export const CV_DATA = {
     { degree: 'Tecnólogo en Gestión de Redes de Datos', institution: 'SENA', year: '2018' },
   ],
 
+  // Certificaciones Oficiales (entidades certificadoras)
+  officialCertifications: [
+    { title: 'Linux Essentials', issuer: 'LPI', color: 'border-orange-500 bg-orange-50', icon: '🐧' },
+    { title: 'Scrum Practitioner', issuer: 'CertMind', color: 'border-blue-500 bg-blue-50', icon: '⚡' },
+  ],
+
   // Certificaciones organizadas por categoría
   certificatesByCategory: {
     'DevOps & Cloud': [
       'DevOps y Cloud con Azure DevOps, App Service Pipelines y Git — Udemy',
       'Docker Compose with Selenium — Udemy',
       'La Guía de Jenkins: De Cero a Experto — Udemy',
-      'Linux Essentials — LPI',
     ],
     'Calidad & QA': [
       'ISTQB Certified Tester Foundation Level (CTFL 4.0) — Udemy',
-      'Scrum Practitioner — CertMind',
       'Master: Pruebas de Rendimiento con Apache JMeter — Udemy',
       'Introducción a Automatización de Pruebas con Puppeteer — Platzi',
     ],

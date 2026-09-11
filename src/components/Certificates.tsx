@@ -2,13 +2,21 @@ interface CertificateCategory {
   [key: string]: string[]
 }
 
+interface OfficialCertification {
+  title: string
+  issuer: string
+  color: string
+  icon: string
+}
+
 interface CertificatesProps {
-  items: string[]
+  items?: string[]
   byCategory?: CertificateCategory
+  officialCertifications?: OfficialCertification[]
   microsoftStudies?: string[]
 }
 
-export const Certificates = ({ byCategory, microsoftStudies = [] }: CertificatesProps) => {
+export const Certificates = ({ byCategory, officialCertifications = [], microsoftStudies = [] }: CertificatesProps) => {
   const categories = byCategory || {}
   const categoryColors: { [key: string]: string } = {
     'DevOps & Cloud': 'border-orange-500 bg-orange-50',
@@ -35,9 +43,32 @@ export const Certificates = ({ byCategory, microsoftStudies = [] }: Certificates
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold mb-12 text-gray-900">Certificaciones & Formación</h2>
 
-        {/* CERTIFICACIONES POR CATEGORÍA */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 text-gray-900">Certificaciones Profesionales</h3>
+        {/* CERTIFICACIONES OFICIALES */}
+        {officialCertifications.length > 0 && (
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold mb-8 text-gray-900">Certificaciones Oficiales</h3>
+            <div className="grid grid-cols-2 gap-6">
+              {officialCertifications.map((cert, index) => (
+                <div
+                  key={index}
+                  className={`border-l-4 rounded-lg p-6 flex flex-col items-start ${cert.color}`}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-3xl">{cert.icon}</span>
+                    <div>
+                      <h4 className="text-lg font-bold text-gray-900">{cert.title}</h4>
+                      <p className="text-sm text-gray-600">Emisor: {cert.issuer}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* CURSOS DE FORMACIÓN */}
+        <div>
+          <h3 className="text-2xl font-bold mb-8 text-gray-900">Cursos de Formación</h3>
           <div className="grid grid-cols-3 gap-4 auto-rows-fr">
             {Object.entries(categories).map(([category, certs]) => (
               <div

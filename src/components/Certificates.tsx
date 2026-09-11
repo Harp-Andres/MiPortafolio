@@ -42,7 +42,7 @@ export const Certificates = ({ byCategory, microsoftStudies = [] }: Certificates
             {Object.entries(categories).map(([category, certs]) => (
               <div
                 key={category}
-                className={`border-l-4 rounded-lg p-6 ${categoryColors[category] || 'border-gray-300 bg-gray-50'}`}
+                className={`border-l-4 rounded-lg p-6 min-h-56 flex flex-col ${categoryColors[category] || 'border-gray-300 bg-gray-50'}`}
               >
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-2xl">{categoryIcons[category] || '📌'}</span>

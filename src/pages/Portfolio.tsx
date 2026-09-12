@@ -47,9 +47,16 @@ export const Portfolio = () => {
                   <div className="flex-1 p-8">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                          {project.name}
-                        </h3>
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <h3 className="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors mb-2">
+                            {project.name}
+                          </h3>
+                        </a>
                         <p className="text-lg text-blue-600 font-semibold">
                           {project.description}
                         </p>
@@ -97,18 +104,9 @@ export const Portfolio = () => {
                       </div>
                     </div>
 
-                    {/* Links */}
-                    <div className="flex gap-4">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
-                      >
-                        <Code size={20} />
-                        Ver Código
-                      </a>
-                      {project.link && (
+                    {/* Visit Link */}
+                    {project.link && (
+                      <div className="flex gap-4">
                         <a
                           href={project.link}
                           target="_blank"
@@ -116,10 +114,10 @@ export const Portfolio = () => {
                           className="inline-flex items-center gap-2 text-green-600 hover:text-green-800 font-semibold transition-colors"
                         >
                           <ExternalLink size={20} />
-                          Ver Sitio
+                          Ver Sitio en Vivo
                         </a>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

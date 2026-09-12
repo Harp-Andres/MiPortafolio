@@ -1,5 +1,10 @@
+interface Certificate {
+  title: string
+  filePath: string | null
+}
+
 interface CertificateCategory {
-  [key: string]: string[]
+  [key: string]: Certificate[] | string[]
 }
 
 interface OfficialCertification {
@@ -10,13 +15,29 @@ interface OfficialCertification {
 }
 
 interface CertificatesProps {
-  items?: string[]
+  items?: (Certificate | string)[]
   byCategory?: CertificateCategory
   officialCertifications?: OfficialCertification[]
 }
 
+const isCertificateObject = (cert: unknown): cert is Certificate => {
+  return typeof cert === 'object' && cert !== null && 'title' in cert
+}
+
 export const Certificates = ({ byCategory, officialCertifications = [] }: CertificatesProps) => {
   const categories = byCategory || {}
+  
+  const handleDownload = (filePath: string | null) => {
+    if (!filePath) return
+    // The file path is relative to public, so we can use it directly
+    const link = document.createElement('a')
+    link.href = filePath
+    link.download = filePath.split('/').pop() || 'certificado'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const categoryColors: { [key: string]: string } = {
     'DevOps & Cloud': 'border-orange-500 bg-orange-50',
     'Calidad & QA': 'border-blue-500 bg-blue-50',
@@ -79,12 +100,30 @@ export const Certificates = ({ byCategory, officialCertifications = [] }: Certif
                   <h4 className="text-lg font-bold text-gray-900">{category}</h4>
                 </div>
                 <ul className="space-y-3">
-                  {certs.map((cert, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <span className="text-blue-600 font-bold mt-1">•</span>
-                      <span className="text-gray-700">{cert}</span>
-                    </li>
-                  ))}
+                  {certs.map((cert, index) => {
+                    const isObject = isCertificateObject(cert)
+                    const title = isObject ? cert.title : cert
+                    const filePath = isObject ? cert.filePath : null
+                    const hasFile = isObject && cert.filePath !== null
+
+                    return (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-blue-600 font-bold mt-1">•</span>
+                        {hasFile ? (
+                          <button
+                            onClick={() => handleDownload(filePath)}
+                            className="text-left text-blue-600 hover:text-blue-800 hover:underline transition-colors cursor-pointer text-gray-700 hover:text-blue-600"
+                            title="Clic para descargar"
+                          >
+                            {title}
+                            <span className="ml-1 text-sm">📥</span>
+                          </button>
+                        ) : (
+                          <span className="text-gray-700">{title}</span>
+                        )}
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
             ))}

@@ -1,28 +1,33 @@
 /// <reference types="vitest/globals" />
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
+import { HashRouter } from 'react-router-dom'
 import { Navigation } from '../Navigation'
 
 vi.mock('../hooks', () => ({
   useScrollPosition: () => false
 }))
 
+const renderWithRouter = (component: React.ReactElement) => {
+  return render(<HashRouter>{component}</HashRouter>)
+}
+
 describe('Navigation Component', () => {
   const mockOnDownloadATS = vi.fn()
   const mockOnDownloadVisual = vi.fn()
 
   it('should render navigation with logo', () => {
-    render(
+    renderWithRouter(
       <Navigation 
         onDownloadATS={mockOnDownloadATS} 
         onDownloadVisual={mockOnDownloadVisual} 
       />
     )
-    expect(screen.getByText('PORTAFOLIO')).toBeInTheDocument()
+    expect(screen.getByText('INICIO')).toBeInTheDocument()
   })
 
   it('should render all navigation links', () => {
-    render(
+    renderWithRouter(
       <Navigation 
         onDownloadATS={mockOnDownloadATS} 
         onDownloadVisual={mockOnDownloadVisual} 
@@ -35,18 +40,18 @@ describe('Navigation Component', () => {
   })
 
   it('should have correct href values for navigation links', () => {
-    render(
+    renderWithRouter(
       <Navigation 
         onDownloadATS={mockOnDownloadATS} 
         onDownloadVisual={mockOnDownloadVisual} 
       />
     )
     const aboutLink = screen.getByText('Sobre Mi').closest('a')
-    expect(aboutLink).toHaveAttribute('href', '#about')
+    expect(aboutLink).toHaveAttribute('href', '/#about')
   })
 
   it('should toggle mobile menu on button click', () => {
-    const { container } = render(
+    const { container } = renderWithRouter(
       <Navigation 
         onDownloadATS={mockOnDownloadATS} 
         onDownloadVisual={mockOnDownloadVisual} 
@@ -62,7 +67,7 @@ describe('Navigation Component', () => {
   })
 
   it('should be fixed position', () => {
-    const { container } = render(
+    const { container } = renderWithRouter(
       <Navigation 
         onDownloadATS={mockOnDownloadATS} 
         onDownloadVisual={mockOnDownloadVisual} 

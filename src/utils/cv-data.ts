@@ -97,46 +97,46 @@ export const CV_DATA = {
     { title: 'Scrum Practitioner', issuer: 'CertMind', color: 'border-blue-500 bg-blue-50', icon: '⚡' },
   ],
 
-  // Certificaciones organizadas por categoría con rutas de archivos
+  // Certificaciones organizadas por categoría con rutas de archivos e intensidad horaria
   certificatesByCategory: {
     'DevOps & Cloud': [
-      { title: 'DevOps y Cloud con Azure DevOps, App Service Pipelines y Git — Udemy', filePath: '/certificados/Azure/Udemy/certificado-azure.jpg' },
-      { title: 'Docker Compose with Selenium — Udemy', filePath: null },
-      { title: 'La Guía de Jenkins: De Cero a Experto — Udemy', filePath: '/certificados/Jenkins/Udemy/certificado-jenkins.jpg' },
+      { title: 'DevOps y Cloud con Azure DevOps, App Service Pipelines y Git — Udemy', filePath: '/certificados/Azure/Udemy/certificado-azure.jpg', hours: 21 },
+      { title: 'Docker Compose with Selenium — Udemy', filePath: null, hours: 3 },
+      { title: 'La Guía de Jenkins: De Cero a Experto — Udemy', filePath: '/certificados/Jenkins/Udemy/certificado-jenkins.jpg', hours: 32 },
     ],
     'Calidad & QA': [
-      { title: 'ISTQB Certified Tester Foundation Level (CTFL 4.0) — Udemy', filePath: '/certificados/ISTQB/Udemy/certificado-ISTQB.jpg' },
-      { title: 'Master: Pruebas de Rendimiento con Apache JMeter — Udemy', filePath: '/certificados/Jmeter/Udemy/certificado-Jmeter.jpg' },
-      { title: 'Introducción a Automatización de Pruebas con Puppeteer — Platzi', filePath: '/certificados/Puppeteer/diploma-puppeteer.pdf' },
+      { title: 'ISTQB Certified Tester Foundation Level (CTFL 4.0) — Udemy', filePath: '/certificados/ISTQB/Udemy/certificado-ISTQB.jpg', hours: 18 },
+      { title: 'Master: Pruebas de Rendimiento con Apache JMeter — Udemy', filePath: '/certificados/Jmeter/Udemy/certificado-Jmeter.jpg', hours: 16 },
+      { title: 'Introducción a Automatización de Pruebas con Puppeteer — Platzi', filePath: '/certificados/Puppeteer/diploma-puppeteer.pdf', hours: 12 },
     ],
     'Automatización Web & Mobile': [
-      { title: 'Selenium WebDriver y Grid — Udemy', filePath: '/certificados/Selenium/Udemy/Certificado-Selenium.jpeg' },
-      { title: 'Selenium Essential Training — LinkedIn Learning', filePath: '/certificados/Selenium/LinkedIn/certificado.png' },
-      { title: 'Master Class de Appium 2 con Java — Udemy', filePath: '/certificados/Appium/Udemy/certificado-appium.jpg' },
-      { title: 'Configuración básica con Appium+Serenity — Udemy', filePath: null },
-      { title: 'Cypress: Master en Automatización Test QA — Udemy', filePath: '/certificados/Cypress/Udemy/certificado-cypress.jpg' },
+      { title: 'Selenium WebDriver y Grid — Udemy', filePath: '/certificados/Selenium/Udemy/Certificado-Selenium.jpeg', hours: 21 },
+      { title: 'Selenium Essential Training — LinkedIn Learning', filePath: '/certificados/Selenium/LinkedIn/certificado.png', hours: 5 },
+      { title: 'Master Class de Appium 2 con Java — Udemy', filePath: '/certificados/Appium/Udemy/certificado-appium.jpg', hours: 22 },
+      { title: 'Configuración básica con Appium+Serenity — Udemy', filePath: null, hours: 8 },
+      { title: 'Cypress: Master en Automatización Test QA — Udemy', filePath: '/certificados/Cypress/Udemy/certificado-cypress.jpg', hours: 23 },
+      { title: 'Master: Katalon Studio Test QA Automation — Udemy', filePath: '/certificados/Katalon/Udemy/certificado-katalon.jpg', hours: 20 },
     ],
     'Playwright & API Testing': [
-      { title: 'Automatización de Pruebas API Rest con Playwright — Udemy', filePath: '/certificados/Playwright/Udemy/ApiRest.jpg' },
-      { title: 'Curso de Playwright con JavaScript — Udemy', filePath: '/certificados/Playwright/Udemy/Playwright-JavaScript.jpg' },
-      { title: 'Dominando Playwright con TypeScript: E2E Testing moderno — Udemy', filePath: '/certificados/Playwright/Udemy/Playwright-TypeScript.jpg' },
-    ],
-    'Otros Frameworks & Herramientas': [
-      { title: 'Master: Katalon Studio Test QA Automation — Udemy', filePath: '/certificados/Katalon/Udemy/certificado-katalon.jpg' },
+      { title: 'Automatización de Pruebas API Rest con Playwright — Udemy', filePath: '/certificados/Playwright/Udemy/ApiRest.jpg', hours: 16 },
+      { title: 'Curso de Playwright con JavaScript — Udemy', filePath: '/certificados/Playwright/Udemy/Playwright-JavaScript.jpg', hours: 19 },
+      { title: 'Dominando Playwright con TypeScript: E2E Testing moderno — Udemy', filePath: '/certificados/Playwright/Udemy/Playwright-TypeScript.jpg', hours: 21 },
     ],
     'IA & Productividad': [
-      { title: 'AI Fluency: Framework & Foundations — Anthropic', filePath: '/certificados/Claude/Anthropic/certificate-ajn9p5t7viwu-1785328726.pdf' },
-      { title: 'Introduction to Claude Cowork — Anthropic', filePath: '/certificados/Claude/Anthropic/certificate-mhvrsy7hrbqy-1785539021.pdf' },
-      { title: 'Claude 101 — Anthropic', filePath: '/certificados/Claude/Anthropic/certificate-va95o32xghxo-1785468260.pdf' },
-      { title: 'Escriba indicaciones eficaces para lograr resultados óptimos — Microsoft', filePath: null },
-      { title: 'Introducción a Microsoft Copilot Studio — Microsoft', filePath: null },
-      { title: 'Introducción a Microsoft 365 Copilot Chat (básico) — Microsoft', filePath: null },
-    ],
-    'Programación & Desarrollo': [
-      { title: 'JavaScript — Cymetria Group', filePath: '/certificados/JavaScript/Cymetria/certificado-Hardware-Andres-Rodriguez.pdf' },
-      { title: 'Programa Oracle Next Education (7 formaciones) — Oracle + Alura', filePath: '/certificados/Alura/Hardware-Andres-Rodriguez-Programa.pdf' },
+      { title: 'AI Fluency: Framework & Foundations — Anthropic', filePath: '/certificados/Claude/Anthropic/certificate-ajn9p5t7viwu-1785328726.pdf', hours: 2 },
+      { title: 'Introduction to Claude Cowork — Anthropic', filePath: '/certificados/Claude/Anthropic/certificate-mhvrsy7hrbqy-1785539021.pdf', hours: 1 },
+      { title: 'Claude 101 — Anthropic', filePath: '/certificados/Claude/Anthropic/certificate-va95o32xghxo-1785468260.pdf', hours: 1 },
+      { title: 'Escriba indicaciones eficaces para lograr resultados óptimos — Microsoft', filePath: null, hours: 3 },
+      { title: 'Introducción a Microsoft Copilot Studio — Microsoft', filePath: null, hours: 2 },
+      { title: 'Introducción a Microsoft 365 Copilot Chat (básico) — Microsoft', filePath: null, hours: 2 },
     ],
   },
+
+  // Rutas de aprendizaje - Cursos más formales y de mayor duración
+  learningPathsCertifications: [
+    { title: 'JavaScript — Cymetria Group', filePath: '/certificados/JavaScript/Cymetria/certificado-Hardware-Andres-Rodriguez.pdf', hours: 40 },
+    { title: 'Programa Oracle Next Education (7 formaciones) — Oracle + Alura', filePath: '/certificados/Alura/Hardware-Andres-Rodriguez-Programa.pdf', hours: 240 },
+  ],
 
   certificates: [
     { title: 'AI Fluency: Framework & Foundations — Anthropic', filePath: '/certificados/Claude/Anthropic/certificate-ajn9p5t7viwu-1785328726.pdf' },

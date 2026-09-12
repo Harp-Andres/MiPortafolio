@@ -30,6 +30,7 @@ export const Home = (_props: HomeProps) => {
       <Education items={CV_DATA.education} />
       <Certificates 
         byCategory={CV_DATA.certificatesByCategory}
+        learningPaths={CV_DATA.learningPathsCertifications}
         officialCertifications={CV_DATA.officialCertifications}
         items={CV_DATA.certificates}
       />

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Single Page Apps for GitHub Pages</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // This script takes the current url and stores it, then redirects to index.html
+      var l = window.location;
+      sessionStorage.redirect = l.href.split(l.hostname)[1];
+      if (sessionStorage.redirect.startsWith('//')) {
+        sessionStorage.redirect = '/' + sessionStorage.redirect.slice(2);
+      }
+      l.href = l.origin + '/MiPortafolio/';
+    </script>
+  </head>
+  <body></body>
+</html>

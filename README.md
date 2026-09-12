@@ -1,33 +1,26 @@
-# 🚀 MiPortafolio - Portafolio SDET + CV Generator
+# 🚀 Hoja de Vida SDET - Andrés Rodríguez Pisa
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/Harp-Andres/MiPortafolio/build.yml?branch=main)](https://github.com/Harp-Andres/MiPortafolio/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Harp-Andres/MiPortafolio/deploy.yml?branch=main)](https://github.com/Harp-Andres/MiPortafolio/actions)
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38B2AC)](https://tailwindcss.com)
-[![Testing](https://img.shields.io/badge/Testing-Playwright-45ba4b)](https://playwright.dev)
+[![Testing](https://img.shields.io/badge/Testing-Vitest%20%2B%20Playwright-45ba4b)](https://playwright.dev)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**Autor:** Andrés Rodríguez Pisa | **SDET | Senior QA Automation Engineer**  
-**Versión:** 2.0.0 (Modernizado 2026) | **[Live Demo](https://harp-andres.github.io/MiPortafolio/)**
+**Autor:** Andrés Rodríguez Pisa | **SDET Senior | QA Automation Engineer**  
+**Versión:** 2.0.0 (React Router + Portfolio Projects) | **[🌐 Live Demo](https://harp-andres.github.io/MiPortafolio/)**
 
 ---
 
 ## 📋 Descripción
 
-Portafolio profesional **SDET-focused** construido con **React 18 + TypeScript + Tailwind CSS v4** y **Vite**.  
-Plataforma completamente automatizada para gestionar CV profesional con generación dual de documentos (ATS + Visual) y validación exhaustiva mediante tests E2E.
-
-**Caso de Uso:** Demostrar competencias SDET mediante automatización, testing, CI/CD y validación de calidad en el propio portafolio.
-
-### ✨ Características Clave
-
-| Característica | Descripción |
-|---|---|
-| **React 18 + TypeScript (Strict)** | Tipado fuerte, componentes reutilizables |
-| **Tailwind CSS v4** | Diseño moderno responsivo (3-column grid uniforme) |
-| **Vite ESM** | Build optimizado con HMR en desarrollo |
-| **CV Centralized** | Single source of truth en `src/utils/cv-data.ts` |
-| **Dual CV Export** | ATS (DOCX) + Visual (descargable) |
+Hoja de Vida profesional **SDET** construida con **React 18 + TypeScript + Tailwind CSS v4** y **Vite**.  
+Plataforma completa para gestionar CV profesional con:
+- ✅ Generación dual de CV (ATS-optimized + Visual PDF)
+- ✅ Página de Proyectos con GitHub integration
+- ✅ Testing exhaustivo (65+ unit tests + E2E tests)
+- ✅ CI/CD pipeline con GitHub Actions
+- ✅ Responsive design (mobile-first)
 | **Playwright E2E** | Tests de funcionalidad y responsivo |
 | **GitHub Actions CI/CD** | Lint → Build → Tests → Deploy automatizado |
 | **Responsive Design** | Mobile-first, tested en 3+ viewports |

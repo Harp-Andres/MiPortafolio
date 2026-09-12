@@ -8,9 +8,9 @@ export const Footer = () => {
           
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold mb-2">PORTAFOLIO</h3>
+            <h3 className="text-2xl font-bold mb-2">HOJA DE VIDA</h3>
             <p className="text-gray-400">
-              Ingeniero de Calidad de Software | QA Automation
+              SDET Senior | QA Automation Engineer
             </p>
           </div>
 
@@ -18,10 +18,10 @@ export const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#about" className="hover:text-white transition-colors">Sobre Mí</a></li>
-              <li><a href="#skills" className="hover:text-white transition-colors">Habilidades</a></li>
-              <li><a href="#experience" className="hover:text-white transition-colors">Experiencia</a></li>
-              <li><a href="#education" className="hover:text-white transition-colors">Educación</a></li>
+              <li><a href="/#about" className="hover:text-white transition-colors">Sobre Mí</a></li>
+              <li><a href="/#skills" className="hover:text-white transition-colors">Habilidades</a></li>
+              <li><a href="/#experience" className="hover:text-white transition-colors">Experiencia</a></li>
+              <li><a href="/#education" className="hover:text-white transition-colors">Educación</a></li>
             </ul>
           </div>
 

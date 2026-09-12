@@ -16,11 +16,11 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   const navLinks = [
-    { label: 'Sobre Mi', href: '#about' },
-    { label: 'Habilidades', href: '#skills' },
-    { label: 'Experiencia', href: '#experience' },
-    { label: 'Educacion', href: '#education' },
-    { label: 'Portafolio', href: '/portafolio', isRoute: true },
+    { label: 'Sobre Mi', href: '/#about', isRoute: false },
+    { label: 'Habilidades', href: '/#skills', isRoute: false },
+    { label: 'Experiencia', href: '/#experience', isRoute: false },
+    { label: 'Educacion', href: '/#education', isRoute: false },
+    { label: 'Proyectos', href: '/portafolio', isRoute: true },
   ]
 
   return (
@@ -33,7 +33,7 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="text-white font-bold text-xl">
-              PORTAFOLIO
+              INICIO
             </Link>
           </div>
 

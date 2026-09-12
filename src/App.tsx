@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Navigation, Footer } from './components'
 import { Home, Portfolio } from './pages'
 import { downloadCV } from './utils/download-cv'
@@ -26,7 +26,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter basename="/MiPortafolio">
+    <HashRouter>
       <div className="min-h-screen bg-white">
         <Navigation onDownloadATS={handleDownloadATS} onDownloadVisual={handleDownloadVisual} />
         
@@ -48,7 +48,7 @@ function App() {
           </div>
         )}
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

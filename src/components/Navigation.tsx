@@ -1,5 +1,6 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useScrollPosition } from '../hooks'
 import { CVDownloads } from './CVDownloads'
 
@@ -19,6 +20,7 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
     { label: 'Habilidades', href: '#skills' },
     { label: 'Experiencia', href: '#experience' },
     { label: 'Educacion', href: '#education' },
+    { label: 'Portafolio', href: '/portafolio', isRoute: true },
   ]
 
   return (
@@ -30,21 +32,31 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
           
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#" className="text-white font-bold text-xl">
+            <Link to="/" className="text-white font-bold text-xl">
               PORTAFOLIO
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {link.label}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-gray-300 hover:text-white transition-colors font-semibold"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </div>
 
@@ -69,14 +81,25 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
           <div className="md:hidden pb-4">
             <div className="space-y-2">
               {navLinks.map(link => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </a>
+                link.isRoute ? (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="block px-3 py-2 text-gray-300 hover:text-white transition-colors font-semibold"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
               <div className="pt-4 px-3">
                 <CVDownloads onDownloadATS={onDownloadATS} onDownloadVisual={onDownloadVisual} />

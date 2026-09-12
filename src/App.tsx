@@ -3,8 +3,11 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Navigation, Footer } from './components'
 import { Home, Portfolio } from './pages'
 import { downloadCV } from './utils/download-cv'
+import { useCopyClean } from './hooks/useCopyClean'
 
 function App() {
+  // Limpiar caracteres especiales cuando se copia texto
+  useCopyClean()
   const [isLoading, setIsLoading] = useState(false)
 
   const handleDownloadATS = async () => {

@@ -42,3 +42,6 @@ build
 
 # Playwright
 .auth
+
+# Development Documentation (Local Only)
+.dev-docs

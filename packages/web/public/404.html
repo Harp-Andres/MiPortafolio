@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Single Page Apps for GitHub Pages</title>
+    <script type="text/javascript">
+      // Manejar SPA routing en GitHub Pages
+      var l = window.location;
+      // Guardar la ruta completa en sessionStorage
+      var redirectPath = l.pathname + l.search + l.hash;
+      sessionStorage.redirect = redirectPath;
+      // Redireccionar a index.html
+      l.href = l.origin + l.pathname.split('/').slice(0, 2).join('/') + '/';
+    </script>
+  </head>
+  <body></body>
+</html>

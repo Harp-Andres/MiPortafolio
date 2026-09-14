@@ -1,0 +1,462 @@
+{
+  "profile": {
+    "name": "Andrés Rodríguez Pisa",
+    "title": "SDET Senior | QA Automation Engineer | TypeScript & Python Specialist",
+    "email": "andres.rodriguez@email.com",
+    "phone": "(+57) 320 324 5988",
+    "location": "Bogotá, Colombia",
+    "bio": "Experienced SDET Senior with 8+ years in software testing and automation. Specialized in building robust test automation frameworks using TypeScript, Python, Playwright, and Selenium. Expert in CI/CD integration, API testing, and performance optimization. Proven track record of leading automation initiatives that reduced manual testing by 70% and improved test reliability. Passionate about creating maintainable, scalable test solutions.",
+    "github": "https://github.com/Harp-Andres",
+    "linkedin": "https://linkedin.com/in/harp-andres",
+    "portfolio": "https://Harp-Andres.github.io/MiPortafolio/"
+  },
+  "skills": [
+    {
+      "category": "Mobile Automation",
+      "skills": [
+        {"name": "Appium", "level": "advanced"},
+        {"name": "XCUITest", "level": "intermediate"},
+        {"name": "Espresso", "level": "intermediate"}
+      ]
+    },
+    {
+      "category": "Web Automation",
+      "skills": [
+        {"name": "Playwright", "level": "expert"},
+        {"name": "Selenium", "level": "expert"},
+        {"name": "Cypress", "level": "advanced"},
+        {"name": "WebdriverIO", "level": "intermediate"}
+      ]
+    },
+    {
+      "category": "API & Backend",
+      "skills": [
+        {"name": "REST APIs", "level": "expert"},
+        {"name": "GraphQL", "level": "advanced"},
+        {"name": "Postman", "level": "expert"},
+        {"name": "Newman", "level": "advanced"}
+      ]
+    },
+    {
+      "category": "DevOps & CI/CD",
+      "skills": [
+        {"name": "GitHub Actions", "level": "expert"},
+        {"name": "Jenkins", "level": "advanced"},
+        {"name": "Docker", "level": "advanced"},
+        {"name": "AWS", "level": "intermediate"}
+      ]
+    },
+    {
+      "category": "Cloud",
+      "skills": [
+        {"name": "AWS S3", "level": "advanced"},
+        {"name": "AWS Lambda", "level": "intermediate"},
+        {"name": "Azure VM", "level": "intermediate"}
+      ]
+    },
+    {
+      "category": "Azure",
+      "skills": [
+        {"name": "Azure DevOps", "level": "advanced"},
+        {"name": "Azure VMs", "level": "intermediate"}
+      ]
+    },
+    {
+      "category": "Programming Languages",
+      "skills": [
+        {"name": "TypeScript", "level": "expert"},
+        {"name": "Python", "level": "expert"},
+        {"name": "JavaScript", "level": "expert"},
+        {"name": "Java", "level": "advanced"}
+      ]
+    },
+    {
+      "category": "Build Tools",
+      "skills": [
+        {"name": "Vite", "level": "advanced"},
+        {"name": "Webpack", "level": "advanced"},
+        {"name": "Maven", "level": "intermediate"},
+        {"name": "Gradle", "level": "intermediate"}
+      ]
+    },
+    {
+      "category": "Reporting Tools",
+      "skills": [
+        {"name": "Allure Report", "level": "expert"},
+        {"name": "Extent Report", "level": "advanced"},
+        {"name": "Mochawesome", "level": "advanced"}
+      ]
+    },
+    {
+      "category": "Databases",
+      "skills": [
+        {"name": "PostgreSQL", "level": "advanced"},
+        {"name": "MongoDB", "level": "advanced"},
+        {"name": "MySQL", "level": "intermediate"}
+      ]
+    },
+    {
+      "category": "Test Management",
+      "skills": [
+        {"name": "Jira", "level": "expert"},
+        {"name": "TestRail", "level": "advanced"},
+        {"name": "Xray", "level": "advanced"}
+      ]
+    },
+    {
+      "category": "IA & Productivity",
+      "skills": [
+        {"name": "GitHub Copilot", "level": "advanced"},
+        {"name": "ChatGPT", "level": "advanced"},
+        {"name": "Claude", "level": "advanced"}
+      ]
+    },
+    {
+      "category": "Scripting",
+      "skills": [
+        {"name": "Bash", "level": "advanced"},
+        {"name": "PowerShell", "level": "intermediate"},
+        {"name": "Shell Scripting", "level": "advanced"}
+      ]
+    },
+    {
+      "category": "Virtualization",
+      "skills": [
+        {"name": "VirtualBox", "level": "advanced"},
+        {"name": "VMware", "level": "intermediate"},
+        {"name": "Docker", "level": "advanced"}
+      ]
+    },
+    {
+      "category": "Architecture & Patterns",
+      "skills": [
+        {"name": "Page Object Model", "level": "expert"},
+        {"name": "BDD", "level": "advanced"},
+        {"name": "Design Patterns", "level": "advanced"},
+        {"name": "Microservices", "level": "intermediate"}
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp1",
+      "title": "SDET Senior",
+      "company": "GFT Technologies",
+      "period": "2023 - Present",
+      "description": "Leading test automation strategy for enterprise banking solutions, designing and implementing end-to-end automation frameworks using Playwright and TypeScript. Mentoring junior QA engineers and establishing quality standards.",
+      "technologies": ["Playwright", "TypeScript", "GitHub Actions", "Docker", "PostgreSQL", "Allure Report"],
+      "achievements": [
+        "Architected new Playwright framework increasing test execution speed by 45%",
+        "Reduced manual testing by 60% through intelligent automation strategy",
+        "Mentored 5+ QA engineers in modern test automation practices",
+        "Established CI/CD quality gates with 98% test reliability"
+      ]
+    },
+    {
+      "id": "exp2",
+      "title": "QA Automation Engineer",
+      "company": "Bizagi",
+      "period": "2021 - 2023",
+      "description": "Developed comprehensive test automation frameworks for enterprise process automation platform. Specialized in API testing, UI automation with Selenium, and performance testing.",
+      "technologies": ["Selenium", "Python", "Postman", "Jenkins", "MongoDB", "Extent Report"],
+      "achievements": [
+        "Built API testing framework using Python reducing manual API testing by 75%",
+        "Automated 150+ critical user workflows across web and mobile platforms",
+        "Implemented performance testing strategy identifying 3 critical bottlenecks",
+        "Established test data management framework supporting 200+ daily test runs"
+      ]
+    },
+    {
+      "id": "exp3",
+      "title": "Senior QA",
+      "company": "TCS (Tata Consultancy Services)",
+      "period": "2019 - 2021",
+      "description": "Led QA automation initiatives for multinational clients in financial services sector. Managed team of 4 QA engineers and oversaw test automation strategy.",
+      "technologies": ["Selenium", "Java", "Jira", "TestRail", "AWS", "Maven"],
+      "achievements": [
+        "Managed automation for 5 concurrent client projects with 95%+ test pass rate",
+        "Trained and mentored 4 QA team members on best practices",
+        "Reduced regression testing time from 5 days to 8 hours using intelligent automation",
+        "Achieved CMMi Level 3 compliance in QA processes"
+      ]
+    },
+    {
+      "id": "exp4",
+      "title": "Quality Assurance Analyst",
+      "company": "Banco Occidente",
+      "period": "2017 - 2019",
+      "description": "Performed functional testing and initiated automation efforts for core banking applications. Collaborated with development team to identify and resolve defects.",
+      "technologies": ["Selenium", "Python", "SQL", "Jira", "MySQL"],
+      "achievements": [
+        "Automated 50+ critical banking workflows reducing manual testing by 40%",
+        "Identified and documented 200+ defects improving product quality",
+        "Established test case management process improving traceability",
+        "Mentored 2 junior QA team members"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu1",
+      "degree": "Ingeniero de Sistemas",
+      "institution": "Universidad Nacional Abierta y a Distancia (UNAD)",
+      "graduation": "2019",
+      "description": "Systems Engineering degree with focus on software development and quality assurance. Coursework included software architecture, database design, and software testing methodologies."
+    },
+    {
+      "id": "edu2",
+      "degree": "Tecnólogo en Análisis y Programación de Sistemas de Información",
+      "institution": "Servicio Nacional de Aprendizaje (SENA)",
+      "graduation": "2015",
+      "description": "Technical diploma in systems analysis and programming. Foundation in software development, databases, and quality assurance principles."
+    }
+  ],
+  "certificates": {
+    "DevOps & Cloud": [
+      {
+        "id": "cert_devops_1",
+        "name": "AWS Certified Solutions Architect - Associate",
+        "issuer": "Amazon Web Services",
+        "date": "2023",
+        "hours": 40,
+        "credentialURL": "https://aws.amazon.com/certification/"
+      },
+      {
+        "id": "cert_devops_2",
+        "name": "Docker Certified Associate",
+        "issuer": "Docker",
+        "date": "2023",
+        "hours": 30,
+        "credentialURL": "https://docker.com/certification/"
+      },
+      {
+        "id": "cert_devops_3",
+        "name": "Azure Administrator Certified",
+        "issuer": "Microsoft",
+        "date": "2022",
+        "hours": 35,
+        "credentialURL": "https://microsoft.com/certification/"
+      },
+      {
+        "id": "cert_devops_4",
+        "name": "Kubernetes Application Developer (CKAD)",
+        "issuer": "Linux Foundation",
+        "date": "2023",
+        "hours": 40,
+        "credentialURL": "https://linuxfoundation.org/ckad/"
+      }
+    ],
+    "Quality & QA": [
+      {
+        "id": "cert_qa_1",
+        "name": "ISTQB Certified Tester - Advanced Level (Test Automation Engineer)",
+        "issuer": "International Software Testing Qualifications Board",
+        "date": "2022",
+        "hours": 40,
+        "credentialURL": "https://www.istqb.org/"
+      },
+      {
+        "id": "cert_qa_2",
+        "name": "ISTQB Certified Tester - Foundation Level",
+        "issuer": "International Software Testing Qualifications Board",
+        "date": "2020",
+        "hours": 32,
+        "credentialURL": "https://www.istqb.org/"
+      },
+      {
+        "id": "cert_qa_3",
+        "name": "Selenium WebDriver Certification",
+        "issuer": "Udemy",
+        "date": "2021",
+        "hours": 28,
+        "credentialURL": "https://udemy.com/"
+      },
+      {
+        "id": "cert_qa_4",
+        "name": "Test Automation Engineer Certificate",
+        "issuer": "International Software Testing Institute",
+        "date": "2022",
+        "hours": 36,
+        "credentialURL": "https://istqb.org/"
+      }
+    ],
+    "Automation & Testing Tools": [
+      {
+        "id": "cert_automation_1",
+        "name": "Playwright Advanced Testing Course",
+        "issuer": "Udemy",
+        "date": "2024",
+        "hours": 32,
+        "credentialURL": "https://udemy.com/"
+      },
+      {
+        "id": "cert_automation_2",
+        "name": "API Testing with Postman",
+        "issuer": "Udemy",
+        "date": "2023",
+        "hours": 24,
+        "credentialURL": "https://udemy.com/"
+      },
+      {
+        "id": "cert_automation_3",
+        "name": "Cypress Testing Framework Mastery",
+        "issuer": "Udemy",
+        "date": "2023",
+        "hours": 28,
+        "credentialURL": "https://udemy.com/"
+      },
+      {
+        "id": "cert_automation_4",
+        "name": "Appium Mobile Testing Certificate",
+        "issuer": "Udemy",
+        "date": "2022",
+        "hours": 30,
+        "credentialURL": "https://udemy.com/"
+      }
+    ],
+    "Programming & Development": [
+      {
+        "id": "cert_dev_1",
+        "name": "TypeScript Mastery Course",
+        "issuer": "Udemy",
+        "date": "2024",
+        "hours": 28,
+        "credentialURL": "https://udemy.com/"
+      },
+      {
+        "id": "cert_dev_2",
+        "name": "Python for Test Automation",
+        "issuer": "Udemy",
+        "date": "2023",
+        "hours": 32,
+        "credentialURL": "https://udemy.com/"
+      },
+      {
+        "id": "cert_dev_3",
+        "name": "JavaScript Advanced Concepts",
+        "issuer": "Pluralsight",
+        "date": "2023",
+        "hours": 26,
+        "credentialURL": "https://pluralsight.com/"
+      },
+      {
+        "id": "cert_dev_4",
+        "name": "React & Modern JavaScript Development",
+        "issuer": "Udemy",
+        "date": "2024",
+        "hours": 30,
+        "credentialURL": "https://udemy.com/"
+      }
+    ],
+    "AI & Productivity": [
+      {
+        "id": "cert_ai_1",
+        "name": "AI in Software Testing Specialization",
+        "issuer": "Coursera",
+        "date": "2024",
+        "hours": 40,
+        "credentialURL": "https://coursera.org/"
+      },
+      {
+        "id": "cert_ai_2",
+        "name": "ChatGPT for Software Engineers",
+        "issuer": "Udemy",
+        "date": "2024",
+        "hours": 20,
+        "credentialURL": "https://udemy.com/"
+      },
+      {
+        "id": "cert_ai_3",
+        "name": "GitHub Copilot Professional Development",
+        "issuer": "GitHub Learning Lab",
+        "date": "2024",
+        "hours": 18,
+        "credentialURL": "https://github.com/learning"
+      }
+    ]
+  },
+  "languages": [
+    {
+      "name": "Spanish",
+      "level": "native"
+    },
+    {
+      "name": "English",
+      "level": "fluent"
+    },
+    {
+      "name": "Portuguese",
+      "level": "intermediate"
+    }
+  ],
+  "projects": [
+    {
+      "id": "project1",
+      "name": "Automation Test Reports Hub",
+      "description": "Centralized platform for aggregating and visualizing test reports from multiple automation frameworks (Playwright, Selenium, Cypress) with real-time analytics.",
+      "longDescription": "Enterprise-grade test reporting solution integrating reports from multiple test automation tools. Features include trend analysis, failure pattern detection, performance metrics, and team collaboration tools. Built with React, TypeScript, and Node.js backend.",
+      "technologies": ["React", "TypeScript", "Node.js", "Playwright", "Selenium", "Cypress", "Allure Report"],
+      "github": "https://github.com/Harp-Andres/automation-test-reports-hub",
+      "link": "https://test-reports-hub.example.com",
+      "highlights": [
+        "Real-time test result aggregation from 5+ frameworks",
+        "Advanced analytics and trend detection",
+        "Multi-project support with role-based access",
+        "Performance metrics and timing analysis"
+      ],
+      "type": "Professional",
+      "image": "/projects/automation-test-reports.png"
+    },
+    {
+      "id": "project2",
+      "name": "Buscar Cruceros",
+      "description": "Cruise search and booking comparison platform using web scraping and API integration to provide real-time pricing and availability.",
+      "longDescription": "Full-stack web application for searching and comparing cruise offers from multiple providers. Implements advanced filtering, price comparison, and user review system. Built with React frontend and Python backend with data scraping capabilities.",
+      "technologies": ["React", "Python", "FastAPI", "Web Scraping", "PostgreSQL", "Docker"],
+      "github": "https://github.com/Harp-Andres/buscar-cruceros",
+      "link": "https://buscar-cruceros.example.com",
+      "highlights": [
+        "Real-time pricing aggregation from 10+ cruise providers",
+        "Advanced filtering and comparison tools",
+        "User authentication and booking history",
+        "Responsive mobile design"
+      ],
+      "type": "Full Stack",
+      "image": "/projects/buscar-cruceros.png"
+    },
+    {
+      "id": "project3",
+      "name": "Portfolio Site (MiPortafolio)",
+      "description": "Professional portfolio website showcasing projects, skills, and experience with automated document generation (DOCX, PDF, Excel).",
+      "longDescription": "Modern portfolio platform built with React, TypeScript, and Vite. Features monorepo architecture with automated CV document generation in multiple formats. Includes responsive design, dark mode support, and performance optimization.",
+      "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "FastAPI", "Python", "GitHub Pages"],
+      "github": "https://github.com/Harp-Andres/MiPortafolio",
+      "link": "https://Harp-Andres.github.io/MiPortafolio/",
+      "highlights": [
+        "Monorepo architecture with shared CV data",
+        "Automated DOCX, PDF, Excel generation",
+        "Responsive design with dark mode",
+        "Performance optimized (310 kB bundle, 96.82 kB gzipped)"
+      ],
+      "type": "Open Source",
+      "image": "/projects/portfolio-site.png"
+    },
+    {
+      "id": "project4",
+      "name": "LiteralUra",
+      "description": "Literature discovery and recommendation platform using AI-powered search and personalized recommendations.",
+      "longDescription": "Web application for discovering and exploring literature with AI-powered recommendations. Features include full-text search, user ratings, reading lists, and community recommendations.",
+      "technologies": ["React", "Node.js", "MongoDB", "OpenAI API", "Machine Learning"],
+      "github": "https://github.com/Harp-Andres/literalura",
+      "link": "https://literalura.example.com",
+      "highlights": [
+        "AI-powered book recommendations",
+        "Advanced search and filtering",
+        "Community features and ratings",
+        "Reading progress tracking"
+      ],
+      "type": "AI/ML Project",
+      "image": "/projects/literalura.png"
+    }
+  ]
+}

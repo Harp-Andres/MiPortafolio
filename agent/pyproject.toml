@@ -1,0 +1,156 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mportafolio-agent"
+version = "0.1.0"
+description = "Master Orchestrator Agent for Mi Portafolio - Autonomous CI/CD, Document Generation & Portfolio Management"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = { text = "MIT" }
+authors = [
+    { name = "Mi Portafolio Team", email = "portfolio@example.com" }
+]
+
+[project.dependencies]
+# CLI Framework
+typer = "^0.12.0"
+rich = "^13.0.0"
+
+# Data Validation & Serialization
+pydantic = "^2.0"
+pydantic-settings = "^2.0"
+python-dotenv = "^1.0"
+
+# Async Support
+asyncio = "^3.4.3"
+aiofiles = "^23.0"
+
+# Subprocess Management (OS-agnostic)
+pathlib-plus = "^0.1.0"
+
+# API & HTTP
+httpx = "^0.25.0"
+requests = "^2.31.0"
+
+# Document Generation
+python-docx = "^0.8.11"
+reportlab = "^4.0.4"
+openpyxl = "^3.1.2"
+
+# Testing & Code Quality (dev deps but included in main)
+pytest = "^7.4"
+pytest-asyncio = "^0.21.0"
+pytest-cov = "^4.1.0"
+playwright = "^1.40.0"
+
+# Version Control
+gitpython = "^3.1.40"
+
+# Logging & Monitoring
+structlog = "^23.2.0"
+python-json-logger = "^2.0.7"
+
+# LLM & AI Integration
+anthropic = "^0.7.0"
+openai = "^1.0.0"
+
+# Utilities
+tenacity = "^8.2.3"
+click = "^8.1.7"
+
+[project.optional-dependencies]
+dev = [
+    "black == 23.12.0",
+    "ruff == 0.1.8",
+    "mypy == 1.7.1",
+    "pytest-xdist",
+    "coverage",
+    "pre-commit",
+]
+
+[project.scripts]
+mportafolio-agent = "1_interface.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["1_interface", "2_orchestrator", "3_memory", "4_skills", "5_guardrails", "6_telemetry", "7_state"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | __pycache__
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "W", "I", "N", "UP", "S", "B", "A", "C4", "T"]
+ignore = ["E501"]  # Line length handled by black
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    ".eggs",
+    "*.egg-info",
+    "build",
+    "dist",
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+strict_equality = true
+exclude = [".venv", "build", "dist"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --tb=short --cov=1_interface --cov=2_orchestrator --cov=4_skills"
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["1_interface", "2_orchestrator", "3_memory", "4_skills", "5_guardrails", "6_telemetry", "7_state"]
+omit = [
+    "*/tests/*",
+    "*/__main__.py",
+    "*/venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.uv]
+python = "3.12"
+python-downloads = "automatic"

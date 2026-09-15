@@ -1,0 +1,708 @@
+--- Logging error ---
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 186, in emit
+    self.console.print(log_renderable)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1116, in invoke
+    super().invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 106, in main
+    validate_environment(debug=debug)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 83, in validate_environment
+    EnvironmentValidator.validate(raise_on_error=True)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\5_guardrails\env_validator.py", line 123, in validate
+    if not cls._check_llm_provider():
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\5_guardrails\env_validator.py", line 195, in _check_llm_provider
+    logger.info(f"\u2705 LLM Provider detected: {provider_key}")
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1520, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1665, in _log
+    self.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1681, in handle
+    self.callHandlers(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1741, in callHandlers
+    hdlr.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1027, in handle
+    self.emit(record)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 188, in emit
+    self.handleError(record)
+Message: '\u2705 LLM Provider detected: OPENAI_API_KEY'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 186, in emit
+    self.console.print(log_renderable)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1116, in invoke
+    super().invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 106, in main
+    validate_environment(debug=debug)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 83, in validate_environment
+    EnvironmentValidator.validate(raise_on_error=True)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\5_guardrails\env_validator.py", line 150, in validate
+    logger.info("\u2705 Environment validation passed")
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1520, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1665, in _log
+    self.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1681, in handle
+    self.callHandlers(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1741, in callHandlers
+    hdlr.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1027, in handle
+    self.emit(record)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 188, in emit
+    self.handleError(record)
+Message: '\u2705 Environment validation passed'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 186, in emit
+    self.console.print(log_renderable)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1119, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 150, in ci
+    logger.info("\U0001f680 Starting CI pipeline...")
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1520, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1665, in _log
+    self.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1681, in handle
+    self.callHandlers(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1741, in callHandlers
+    hdlr.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1027, in handle
+    self.emit(record)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 188, in emit
+    self.handleError(record)
+Message: '\U0001f680 Starting CI pipeline...'
+Arguments: ()
+[2026-09-15 09:04:53] [INFO] [1_interface.handlers] Handling CI command
+--- Logging error ---
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 186, in emit
+    self.console.print(log_renderable)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1119, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 153, in ci
+    handle_ci(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 501, in handle_ci
+    logger.info("Handling CI command")
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1520, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1665, in _log
+    self.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1681, in handle
+    self.callHandlers(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1741, in callHandlers
+    hdlr.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1027, in handle
+    self.emit(record)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 188, in emit
+    self.handleError(record)
+Message: 'Handling CI command'
+Arguments: ()
+[2026-09-15 09:04:53] [INFO] [1_interface.handlers] Maestro orchestrating workflow: ci
+--- Logging error ---
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 186, in emit
+    self.console.print(log_renderable)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1119, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 153, in ci
+    handle_ci(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 502, in handle_ci
+    return handle_maestro(workflow="ci", options={"stages": stages} if stages else {}, verbose=verbose)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 225, in handle_maestro
+    logger.info(f"Maestro orchestrating workflow: {workflow}")
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1520, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1665, in _log
+    self.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1681, in handle
+    self.callHandlers(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1741, in callHandlers
+    hdlr.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1027, in handle
+    self.emit(record)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 188, in emit
+    self.handleError(record)
+Message: 'Maestro orchestrating workflow: ci'
+Arguments: ()
+[09/15/26 09:04:53] INFO     [09/15/26 09:04:53] INFO     [09/15/26 09:04:53] INFO     [09/15/26 09:04:53] INFO     [09/15/26 09:04:53] INFO     
+[2026-09-15 09:04:53] [ERROR] [1_interface.handlers] Maestro orchestration failed: 'charmap' codec can't encode character '\U0001f3bc' in position 0: character maps to <undefined>
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 240, in handle_maestro
+    console.print(f"\n[bold cyan]\U0001f3bc Maestro Orchestrator - {workflow.upper()}[/bold cyan]")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 17, in legacy_windows_render
+    term.write_styled(text, style)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 441, in write_styled
+    self.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f3bc' in position 0: character maps to <undefined>
+--- Logging error ---
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 240, in handle_maestro
+    console.print(f"\n[bold cyan]\U0001f3bc Maestro Orchestrator - {workflow.upper()}[/bold cyan]")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 17, in legacy_windows_render
+    term.write_styled(text, style)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 441, in write_styled
+    self.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f3bc' in position 0: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1154, in emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f3bc' in position 368: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1119, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 153, in ci
+    handle_ci(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 502, in handle_ci
+    return handle_maestro(workflow="ci", options={"stages": stages} if stages else {}, verbose=verbose)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 341, in handle_maestro
+    logger.error(f"Maestro orchestration failed: {str(e)}", exc_info=True)
+Message: "Maestro orchestration failed: 'charmap' codec can't encode character '\\U0001f3bc' in position 0: character maps to <undefined>"
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 240, in handle_maestro
+    console.print(f"\n[bold cyan]\U0001f3bc Maestro Orchestrator - {workflow.upper()}[/bold cyan]")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 17, in legacy_windows_render
+    term.write_styled(text, style)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 441, in write_styled
+    self.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f3bc' in position 0: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 186, in emit
+    self.console.print(log_renderable)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1119, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 153, in ci
+    handle_ci(
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 502, in handle_ci
+    return handle_maestro(workflow="ci", options={"stages": stages} if stages else {}, verbose=verbose)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\handlers.py", line 341, in handle_maestro
+    logger.error(f"Maestro orchestration failed: {str(e)}", exc_info=True)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1549, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1665, in _log
+    self.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1681, in handle
+    self.callHandlers(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1741, in callHandlers
+    hdlr.handle(record)
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\logging\__init__.py", line 1027, in handle
+    self.emit(record)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\logging.py", line 188, in emit
+    self.handleError(record)
+Message: "Maestro orchestration failed: 'charmap' codec can't encode character '\\U0001f3bc' in position 0: character maps to <undefined>"
+Arguments: ()
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 157, in ci
+    console.print("\n\u2705 CI pipeline completed successfully\n", style="bold green")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 576, in main_cli
+    app()
+    ~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1154, in __call__
+    raise e
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1137, in __call__
+    return get_command(self)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 801, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1197, in main
+    return _main(
+        self,
+    ...<6 lines>...
+        **extra,
+    )
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 187, in _main
+    rv = self.invoke(ctx)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\core.py", line 1119, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 740, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\_click\core.py", line 483, in invoke
+    return callback(*args, **kwargs)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\typer\main.py", line 1524, in wrapper
+    return callback(**use_params)
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 159, in ci
+    console.print(f"\n\u274c CI pipeline failed: {e}\n", style="bold red")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 587, in <module>
+    main_cli()
+    ~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\cli.py", line 581, in main_cli
+    console.print(f"\n\u274c Unexpected error: {e}\n", style="bold red")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 1704, in print
+    with self:
+         ^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 864, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 820, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2055, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\console.py", line 2091, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_windows_renderer.py", line 19, in legacy_windows_render
+    term.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\.venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\ANDRE\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 0: character maps to <undefined>
+[09/15/26 09:04:53] INFO     [09/15/26 09:04:53] INFO     [09/15/26 09:04:53] INFO     [09/15/26 09:04:53] INFO     

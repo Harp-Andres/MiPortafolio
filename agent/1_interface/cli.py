@@ -16,20 +16,27 @@ import sys
 import logging
 from typing import Optional
 from pathlib import Path
+import importlib.util as _ilu
 
 import typer
 from rich.console import Console
 from rich.logging import RichHandler
 
+# Load modules from numbered directories using importlib
+_AGENT_ROOT = Path(__file__).parent.parent
+
+def _load_module(rel_path: str):
+    """Load a module from a file path relative to agent root"""
+    full_path = _AGENT_ROOT / rel_path
+    spec = _ilu.spec_from_file_location(rel_path.replace("/", ".").replace("\\", "."), full_path)
+    mod = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
 # Import environment validator
-try:
-    from agent_5_guardrails.env_validator import EnvironmentValidator, EnvironmentConfigError
-except ImportError:
-    # Fallback for development
-    import sys
-    from pathlib import Path
-    sys.path.insert(0, str(Path(__file__).parent.parent))
-    from agent_5_guardrails.env_validator import EnvironmentValidator, EnvironmentConfigError
+_guardrails = _load_module("5_guardrails/env_validator.py")
+EnvironmentValidator = _guardrails.EnvironmentValidator
+EnvironmentConfigError = _guardrails.EnvironmentConfigError
 
 # Create Typer app
 app = typer.Typer(
@@ -38,8 +45,10 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
-# Rich console for pretty output
-console = Console()
+# Rich console for pretty output (disable emoji on Windows)
+import os
+_is_windows = os.name == 'nt'
+console = Console(legacy_windows=_is_windows if _is_windows else False)
 
 # Logger setup
 def setup_logging(debug: bool = False) -> logging.Logger:
@@ -74,7 +83,7 @@ def validate_environment(debug: bool = False) -> None:
     
     try:
         EnvironmentValidator.validate(raise_on_error=True)
-        logger.debug("✅ Environment validation passed")
+        logger.debug("[OK] Environment validation passed")
     except EnvironmentConfigError as e:
         console.print(f"\n{e.message}\n", style="bold red")
         sys.exit(1)
@@ -136,19 +145,20 @@ def ci(
       mportafolio-agent ci --stages types,quality,test  # Specific stages
       mportafolio-agent ci --verbose                    # Detailed output
     """
-    from agent_1_interface.handlers import handle_ci
+    from . import handlers
+    handle_ci = handlers.handle_ci
     
     logger = logging.getLogger(__name__)
-    logger.info("🚀 Starting CI pipeline...")
+    logger.info("[START] Starting CI pipeline...")
     
     try:
         handle_ci(
             stages=stages,
             verbose=verbose or ctx.obj.get("debug", False),
         )
-        console.print("\n✅ CI pipeline completed successfully\n", style="bold green")
+        console.print("\n[OK] CI pipeline completed successfully\n", style="bold green")
     except Exception as e:
-        console.print(f"\n❌ CI pipeline failed: {e}\n", style="bold red")
+        console.print(f"\n[FAILED] CI pipeline failed: {e}\n", style="bold red")
         logger.exception("CI pipeline error")
         sys.exit(1)
 
@@ -182,10 +192,11 @@ def deploy(
       mportafolio-agent deploy --env staging        # Deploy to staging
       mportafolio-agent deploy --force              # Skip confirmations
     """
-    from agent_1_interface.handlers import handle_deploy
+    from . import handlers
+    handle_deploy = handlers.handle_deploy
     
     logger = logging.getLogger(__name__)
-    logger.info(f"🚀 Starting deployment to {environment}...")
+    logger.info(f"[START] Starting deployment to {environment}...")
     
     try:
         handle_deploy(
@@ -193,9 +204,9 @@ def deploy(
             force=force,
             verbose=verbose or ctx.obj.get("debug", False),
         )
-        console.print(f"\n✅ Deployment to {environment} completed successfully\n", style="bold green")
+        console.print(f"\n[OK] Deployment to {environment} completed successfully\n", style="bold green")
     except Exception as e:
-        console.print(f"\n❌ Deployment failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Deployment failed: {e}\n", style="bold red")
         logger.exception("Deployment error")
         sys.exit(1)
 
@@ -230,10 +241,11 @@ def test(
       mportafolio-agent test --suite e2e        # E2E tests
       mportafolio-agent test --no-coverage      # Skip coverage
     """
-    from agent_1_interface.handlers import handle_test
+    from . import handlers
+    handle_test = handlers.handle_test
     
     logger = logging.getLogger(__name__)
-    logger.info(f"🧪 Running {suite} test suite...")
+    logger.info(f"[TEST] Running {suite} test suite...")
     
     try:
         handle_test(
@@ -241,9 +253,9 @@ def test(
             coverage=coverage,
             verbose=verbose or ctx.obj.get("debug", False),
         )
-        console.print(f"\n✅ Test suite completed successfully\n", style="bold green")
+        console.print(f"\n[OK] Test suite completed successfully\n", style="bold green")
     except Exception as e:
-        console.print(f"\n❌ Test suite failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Test suite failed: {e}\n", style="bold red")
         logger.exception("Test error")
         sys.exit(1)
 
@@ -288,7 +300,8 @@ def docs(
       mportafolio-agent docs --format pdf       # PDF only
       mportafolio-agent docs -o ./output        # Custom output dir
     """
-    from agent_1_interface.handlers import handle_docs
+    from . import handlers
+    handle_docs = handlers.handle_docs
     
     logger = logging.getLogger(__name__)
     logger.info(f"📄 Generating {format} documents...")
@@ -299,9 +312,9 @@ def docs(
             output_dir=output_dir,
             sync_verify=sync_verify,
         )
-        console.print(f"\n✅ Documents generated successfully\n", style="bold green")
+        console.print(f"\n[OK] Documents generated successfully\n", style="bold green")
     except Exception as e:
-        console.print(f"\n❌ Document generation failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Document generation failed: {e}\n", style="bold red")
         logger.exception("Document generation error")
         sys.exit(1)
 
@@ -345,10 +358,11 @@ def add_project(
     Example:
       mportafolio-agent add-project "MyProject" --tech "React,TypeScript" --link "https://example.com"
     """
-    from agent_1_interface.handlers import handle_add_project
+    from . import handlers
+    handle_add_project = handlers.handle_add_project
     
     logger = logging.getLogger(__name__)
-    logger.info(f"➕ Adding project: {name}")
+    logger.info(f"[START] Adding project: {name}")
     
     try:
         handle_add_project(
@@ -358,9 +372,9 @@ def add_project(
             link=link,
             github=github,
         )
-        console.print(f"\n✅ Project '{name}' added successfully\n", style="bold green")
+        console.print(f"\n[OK] Project '{name}' added successfully\n", style="bold green")
     except Exception as e:
-        console.print(f"\n❌ Failed to add project: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Failed to add project: {e}\n", style="bold red")
         logger.exception("Add project error")
         sys.exit(1)
 
@@ -372,7 +386,7 @@ def add_project(
 @app.command(name="version")
 def version() -> None:
     """Show agent version"""
-    from agent_1_interface import __version__
+    from . import __version__
     console.print(f"mportafolio-agent version {__version__}")
 
 
@@ -394,7 +408,7 @@ def env_check(
     try:
         EnvironmentValidator.validate(raise_on_error=True)
         EnvironmentValidator.print_summary()
-        console.print("✅ Environment is properly configured", style="bold green")
+        console.print("[OK] Environment is properly configured", style="bold green")
     except EnvironmentConfigError as e:
         console.print(f"\n{e.message}\n", style="bold red")
         sys.exit(1)
@@ -418,15 +432,16 @@ def setup_init() -> None:
     Example:
       mportafolio-agent setup-init
     """
-    from agent_setup_agent import setup_init as setup_agent_init
+    _setup_agent = _load_module("setup_agent.py")
+    setup_agent_init = _setup_agent.setup_init
     
-    console.print("\n[bold cyan]🚀 Initializing Portable Agentic Ecosystem[/bold cyan]\n")
+    console.print("\n[bold cyan][SETUP] Initializing Portable Agentic Ecosystem[/bold cyan]\n")
     
     try:
         setup_agent_init()
-        console.print("[bold green]✅ Setup Complete![/bold green]\n")
+        console.print("[bold green][OK] Setup Complete![/bold green]\n")
     except Exception as e:
-        console.print(f"\n❌ Setup failed: {e}\n", style="bold red")
+        console.print(f"\n[FAILED] Setup failed: {e}\n", style="bold red")
         sys.exit(1)
 
 
@@ -443,12 +458,13 @@ def setup_status() -> None:
     Example:
       mportafolio-agent setup-status
     """
-    from agent_setup_agent import status
+    _setup_agent = _load_module("setup_agent.py")
+    status = _setup_agent.status
     
     try:
         status()
     except Exception as e:
-        console.print(f"\n❌ Status check failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Status check failed: {e}\n", style="bold red")
         sys.exit(1)
 
 
@@ -466,12 +482,13 @@ def setup_validate() -> None:
     Example:
       mportafolio-agent setup-validate
     """
-    from agent_setup_agent import validate
+    _setup_agent = _load_module("setup_agent.py")
+    validate = _setup_agent.validate
     
     try:
         validate()
     except Exception as e:
-        console.print(f"\n❌ Validation failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Validation failed: {e}\n", style="bold red")
         sys.exit(1)
 
 
@@ -488,12 +505,13 @@ def setup_mcp_check() -> None:
     Example:
       mportafolio-agent setup-mcp-check
     """
-    from agent_setup_agent import check_mcp
+    _setup_agent = _load_module("setup_agent.py")
+    check_mcp = _setup_agent.check_mcp
     
     try:
         check_mcp()
     except Exception as e:
-        console.print(f"\n❌ MCP check failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] MCP check failed: {e}\n", style="bold red")
         sys.exit(1)
 
 
@@ -513,12 +531,13 @@ def setup_list_skills() -> None:
     Example:
       mportafolio-agent setup-list-skills
     """
-    from agent_setup_agent import list_skills
+    _setup_agent = _load_module("setup_agent.py")
+    list_skills = _setup_agent.list_skills
     
     try:
         list_skills()
     except Exception as e:
-        console.print(f"\n❌ List skills failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] List skills failed: {e}\n", style="bold red")
         sys.exit(1)
 
 
@@ -539,12 +558,13 @@ def setup_show_architecture() -> None:
     Example:
       mportafolio-agent setup-show-architecture
     """
-    from agent_setup_agent import show_architecture
+    _setup_agent = _load_module("setup_agent.py")
+    show_architecture = _setup_agent.show_architecture
     
     try:
         show_architecture()
     except Exception as e:
-        console.print(f"\n❌ Show architecture failed: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Show architecture failed: {e}\n", style="bold red")
         sys.exit(1)
 
 
@@ -560,7 +580,7 @@ def main_cli() -> None:
         console.print("\n⚠️  Operation cancelled by user\n", style="bold yellow")
         sys.exit(130)
     except Exception as e:
-        console.print(f"\n❌ Unexpected error: {e}\n", style="bold red")
+        console.print(f"\n[FAIL] Unexpected error: {e}\n", style="bold red")
         logging.getLogger(__name__).exception("Unexpected error")
         sys.exit(1)
 

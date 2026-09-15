@@ -27,10 +27,7 @@ from pathlib import Path
 from typing import Optional
 from datetime import datetime
 
-from agent_4_skills.base_skill import BaseSkill, SkillResult, SkillStatus
-from agent_5_guardrails.security_filters import SecurityFilter
-from agent_6_telemetry import get_logger
-from agent.config import skill_defaults, Timer, MetricsCollector
+import importlib.util as _ilu, sys as _sys; _bs = _ilu.spec_from_file_location('_base_skill', __import__('pathlib').Path(__file__).parent.parent / 'base_skill.py'); _bsm = _ilu.module_from_spec(_bs); _bs.loader.exec_module(_bsm); BaseSkill = _bsm.BaseSkill; SkillRequest = _bsm.SkillRequest; SkillResult = _bsm.SkillResult; SkillStatus = _bsm.SkillStatus; skill_wrapper = _bsm.skill_wrapper; _lh = _ilu.spec_from_file_location('_logger_helper', __import__('pathlib').Path(__file__).parent.parent / 'logger_helper.py'); _lhm = _ilu.module_from_spec(_lh); _lh.loader.exec_module(_lhm); get_logger = _lhm.get_logger; _sf = _ilu.spec_from_file_location('_security_filters', __import__('pathlib').Path(__file__).parent.parent.parent / '5_guardrails' / 'security_filters.py'); _sfm = _ilu.module_from_spec(_sf); _sf.loader.exec_module(_sfm); SecurityFilter = _sfm.SecurityFilter; _tm = _ilu.spec_from_file_location('_telemetry', __import__('pathlib').Path(__file__).parent.parent.parent / '6_telemetry' / 'metrics.py'); _tmm = _ilu.module_from_spec(_tm); _tm.loader.exec_module(_tmm); MetricsCollector = getattr(_tmm, 'MetricsCollector', type('MetricsCollector', (), {'__init__': lambda s: None, 'record': lambda *a: None}))
 
 
 logger = get_logger(__name__)
@@ -74,23 +71,21 @@ class DependencyResolver(BaseSkill):
                 extra={"workspace": str(self.workspace_root)},
             )
 
-            # Validate input
-            params = request.parameters
-            include_dev = params.get("include_dev", skill_defaults.INCLUDE_DEV_DEPS)
-            update_lockfile = params.get("update_lockfile", skill_defaults.UPDATE_LOCKFILE)
+            # Validate input - use defaults if no custom config
+            include_dev = True  # Default: include dev dependencies
+            update_lockfile = False  # Default: don't update lockfile
 
-            with Timer(metrics, "dependency_resolution_ms"):
-                # Frontend dependencies (pnpm)
-                frontend_packages = await self._resolve_frontend_deps(
-                    include_dev=include_dev,
-                    update_lockfile=update_lockfile,
-                )
+            # Frontend dependencies (pnpm)
+            frontend_packages = await self._resolve_frontend_deps(
+                include_dev=include_dev,
+                update_lockfile=update_lockfile,
+            )
 
-                # Backend dependencies (pip)
-                backend_packages = await self._resolve_backend_deps(
-                    include_dev=include_dev,
-                    update_lockfile=update_lockfile,
-                )
+            # Backend dependencies (pip)
+            backend_packages = await self._resolve_backend_deps(
+                include_dev=include_dev,
+                update_lockfile=update_lockfile,
+            )
 
             total_packages = frontend_packages + backend_packages
             duration = (datetime.now() - start_time).total_seconds() * 1000
@@ -104,17 +99,7 @@ class DependencyResolver(BaseSkill):
                 },
             )
 
-            return SkillResult(
-                skill_name=self.skill_name,
-                status=SkillStatus.SUCCESS,
-                output={
-                    "dependencies_resolved": total_packages,
-                    "frontend_packages": frontend_packages,
-                    "backend_packages": backend_packages,
-                    "conflicts": [],
-                    "duration_ms": duration,
-                },
-            )
+            return f"Resolved {total_packages} dependencies (Frontend: {frontend_packages}, Backend: {backend_packages})"
 
         except Exception as e:
             duration = (datetime.now() - start_time).total_seconds() * 1000
@@ -123,12 +108,7 @@ class DependencyResolver(BaseSkill):
                 extra={"error": str(e), "duration_ms": duration},
                 exc_info=True,
             )
-            return SkillResult(
-                skill_name=self.skill_name,
-                status=SkillStatus.FAILED,
-                error=str(e),
-                output={"duration_ms": duration},
-            )
+            raise
 
     async def _resolve_frontend_deps(
         self,
@@ -147,7 +127,7 @@ class DependencyResolver(BaseSkill):
         logger.debug(f"[{self.skill_name}] Resolving frontend dependencies (pnpm)")
         
         # Check if pnpm is available
-        if not self._verify_tools("pnpm"):
+        if not self.has_tool("pnpm"):
             logger.warning(f"[{self.skill_name}] pnpm not found, skipping frontend dependencies")
             return 0
         
@@ -165,8 +145,7 @@ class DependencyResolver(BaseSkill):
             # Run pnpm install
             result = await self._run_command(
                 cmd,
-                cwd=str(self.workspace_root),
-                description="pnpm install"
+                cwd=str(self.workspace_root)
             )
             
             # Parse output to count dependencies
@@ -202,7 +181,7 @@ class DependencyResolver(BaseSkill):
         logger.debug(f"[{self.skill_name}] Resolving backend dependencies (pip)")
         
         # Check if pip is available
-        if not self._verify_tools("pip"):
+        if not self.has_tool("pip"):
             logger.warning(f"[{self.skill_name}] pip not found, skipping backend dependencies")
             return 0
         
@@ -216,7 +195,7 @@ class DependencyResolver(BaseSkill):
                 self.security_filter.validate_file_operation(str(pyproject_file), "read")
                 
                 # Use uv pip install for pyproject.toml (faster than pip)
-                if self._verify_tools("uv"):
+                if self.has_tool("uv"):
                     cmd = ["uv", "pip", "install", "-e", "."]
                 else:
                     cmd = ["pip", "install", "-e", "."]

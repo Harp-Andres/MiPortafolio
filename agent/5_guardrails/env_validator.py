@@ -116,7 +116,7 @@ class EnvironmentValidator:
             missing_required = cls._check_keys(cls.REQUIRED_KEYS)
             if missing_required:
                 logger.warning(
-                    f"⚠️  Missing recommended keys: {', '.join(missing_required.keys())}"
+                    f"[WARN] Missing recommended keys: {', '.join(missing_required.keys())}"
                 )
 
             # Validate LLM provider
@@ -131,7 +131,7 @@ class EnvironmentValidator:
             github_repo = os.getenv("GITHUB_REPO", "")
             if github_repo and "/" not in github_repo:
                 error = (
-                    f"❌ Invalid GITHUB_REPO format: '{github_repo}'\n"
+                    f"[ERROR] Invalid GITHUB_REPO format: '{github_repo}'\n"
                     f"   Expected: 'owner/repo' (e.g., 'Harp-Andres/MiPortafolio')\n"
                     f"   Edit: {env_file}"
                 )
@@ -144,16 +144,16 @@ class EnvironmentValidator:
             missing_recommended = cls._check_keys(cls.RECOMMENDED_KEYS)
             if missing_recommended:
                 logger.info(
-                    f"ℹ️  Optional keys not configured: {', '.join(missing_recommended.keys())}"
+                    f"[INFO] Optional keys not configured: {', '.join(missing_recommended.keys())}"
                 )
 
-            logger.info("✅ Environment validation passed")
+            logger.info("[OK] Environment validation passed")
             return True
 
         except EnvironmentConfigError:
             raise
         except Exception as e:
-            error = f"❌ Unexpected error during environment validation: {str(e)}"
+            error = f"[ERROR] Unexpected error during environment validation: {str(e)}"
             logger.error(error)
             if raise_on_error:
                 raise EnvironmentConfigError(error, EnvironmentValidationLevel.CRITICAL)
@@ -192,7 +192,7 @@ class EnvironmentValidator:
         """Check if at least one LLM provider is configured"""
         for provider_key in cls.LLM_PROVIDERS.keys():
             if os.getenv(provider_key, "").strip():
-                logger.info(f"✅ LLM Provider detected: {provider_key}")
+                logger.info(f"[OK] LLM Provider detected: {provider_key}")
                 return True
         return False
 
@@ -203,7 +203,7 @@ class EnvironmentValidator:
         
         if env_example.exists():
             return (
-                f"❌ Missing .env file\n\n"
+                f"[ERROR] Missing .env file\n\n"
                 f"Setup:\n"
                 f"  1. Copy template:\n"
                 f"     cp {env_example.name} {env_file.name}\n"
@@ -214,7 +214,7 @@ class EnvironmentValidator:
             )
         else:
             return (
-                f"❌ Missing .env file\n"
+                f"[ERROR] Missing .env file\n"
                 f"   Create: {env_file}\n"
                 f"   Add required keys (see CRITICAL_KEYS in env_validator.py)"
             )
@@ -228,7 +228,7 @@ class EnvironmentValidator:
         env_file = Path(__file__).parent.parent / ".env"
         
         return (
-            f"❌ Missing {level} environment variables:\n\n{keys_str}\n\n"
+            f"[ERROR] Missing {level} environment variables:\n\n{keys_str}\n\n"
             f"Fix:\n"
             f"  1. Edit: {env_file}\n"
             f"  2. Add values for missing keys\n"
@@ -239,7 +239,7 @@ class EnvironmentValidator:
     def _create_llm_provider_error() -> str:
         """Create error message for missing LLM provider"""
         return (
-            f"❌ No LLM provider configured\n\n"
+            f"[ERROR] No LLM provider configured\n\n"
             f"Add ONE of these to your .env:\n"
             f"  • OPENAI_API_KEY=sk-proj-... (for OpenAI/GPT)\n"
             f"  • ANTHROPIC_API_KEY=sk-ant-... (for Anthropic/Claude)\n"
@@ -257,10 +257,10 @@ class EnvironmentValidator:
         print("ENVIRONMENT CONFIGURATION SUMMARY")
         print("=" * 60)
         
-        print("\n✅ CRITICAL KEYS:")
+        print("\n[OK] CRITICAL KEYS:")
         for key in EnvironmentValidator.CRITICAL_KEYS.keys():
-            status = "✓" if os.getenv(key) else "✗"
-            print(f"  [{status}] {key}")
+            status = "[YES]" if os.getenv(key) else "[NO]"
+            print(f"  {status} {key}")
         
         print("\n📦 LLM PROVIDER:")
         found = False

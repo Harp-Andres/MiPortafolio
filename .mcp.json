@@ -1,0 +1,35 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/mcp.json",
+  "mcpServers": {
+    "maestro": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "python", "1_interface/mcp_server.py"],
+      "cwd": "${workspaceFolder}/agent",
+      "env": {
+        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}",
+        "GITHUB_REPO": "${env:GITHUB_REPO}",
+        "OPENAI_API_KEY": "${env:OPENAI_API_KEY}",
+        "ANTHROPIC_API_KEY": "${env:ANTHROPIC_API_KEY}",
+        "PYTHONPATH": "${workspaceFolder}/agent"
+      },
+      "description": "🎼 Maestro - Master orchestrator for portfolio CI/CD, testing, documents and deployment",
+      "tools": [
+        "maestro",
+        "maestro-plan",
+        "skill-type-checker",
+        "skill-build-orchestrator",
+        "skill-quality-gate-runner",
+        "skill-unit-test-runner",
+        "skill-e2e-test-runner",
+        "skill-coverage-analyzer",
+        "skill-pdf-generator",
+        "skill-docx-generator",
+        "skill-excel-generator",
+        "skill-github-pages-deployer",
+        "skill-release-orchestrator",
+        "skill-git-workflow-manager"
+      ]
+    }
+  }
+}

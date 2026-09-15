@@ -1,40 +1,44 @@
-"""
-Quality Gate Runner Skill - Execute final quality gates.
+"""Quality Gate Runner - Lint → Type-check → Build → Test sequence."""
 
-Validates that project meets quality standards before deployment.
-Runs final checks on build, tests, coverage, security, and performance.
-
-Expected Input:
-    {
-        "workspace_root": str,
-        "min_coverage": float (default: 80.0),
-        "max_security_issues": int (default: 0),
-        "max_performance_regression": float (default: 10.0)
-    }
-
-Returns:
-    {
-        "status": "success" | "failed",
-        "gates_passed": int,
-        "gates_failed": int,
-        "coverage": float,
-        "security_issues": int,
-        "performance_score": float,
-        "duration_ms": float
-    }
-"""
-
-import asyncio
+import logging
 from pathlib import Path
-from datetime import datetime
 
-from agent_4_skills.base_skill import BaseSkill, SkillResult, SkillStatus
-from agent_5_guardrails.security_filters import SecurityFilter
-from agent_6_telemetry import get_logger, Timer, MetricsCollector
-from agent.config import skill_defaults
+import importlib.util as _ilu, sys as _sys; _bs = _ilu.spec_from_file_location('_base_skill', __import__('pathlib').Path(__file__).parent.parent / 'base_skill.py'); _bsm = _ilu.module_from_spec(_bs); _bs.loader.exec_module(_bsm); BaseSkill = _bsm.BaseSkill; SkillRequest = _bsm.SkillRequest; SkillResult = _bsm.SkillResult; SkillStatus = _bsm.SkillStatus; skill_wrapper = _bsm.skill_wrapper
+
+logger = logging.getLogger(__name__)
 
 
-logger = get_logger(__name__)
+class QualityGateRunner(BaseSkill):
+    SKILL_NAME = "QualityGateRunner"
+    SKILL_DESCRIPTION = "Runs lint → type-check → build → test quality gates in sequence"
+
+    async def _run_implementation(self, request: SkillRequest) -> str:
+        workspace = self.workspace_root
+        gate_results: list[str] = []
+        failed_gates: list[str] = []
+
+        gates = [
+            ("ESLint", ["pnpm", "--filter", "web", "lint"], workspace),
+            ("Ruff", ["uv", "run", "ruff", "check", "agent/"], workspace),
+            ("TypeScript", ["pnpm", "tsc", "--noEmit"], workspace),
+            ("Frontend Build", ["pnpm", "--filter", "web", "build"], workspace),
+        ]
+
+        for gate_name, cmd, cwd in gates:
+            logger.info(f"[{self.SKILL_NAME}] Running gate: {gate_name}")
+            result = self._run_command(cmd, timeout=120, cwd=cwd)
+            status = "✅ PASS" if result.returncode == 0 else "❌ FAIL"
+            gate_results.append(f"{status}  {gate_name}")
+            if result.returncode != 0:
+                failed_gates.append(gate_name)
+                gate_results.append(result.stdout[-2000:] if result.stdout else "")
+                gate_results.append(result.stderr[-1000:] if result.stderr else "")
+
+        summary = "\n".join(gate_results)
+        if failed_gates:
+            raise RuntimeError(f"Gates failed: {', '.join(failed_gates)}\n\n{summary}")
+
+        return summary
 
 
 class QualityGateRunner(BaseSkill):

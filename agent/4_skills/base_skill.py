@@ -151,6 +151,18 @@ class BaseSkill(ABC):
             else:
                 logger.warning(f"✗ Tool not found: {tool} (will attempt to use anyway)")
 
+    def has_tool(self, tool: str) -> bool:
+        """Check if a tool is available in PATH.
+        
+        Args:
+            tool: Tool name to check (e.g., 'pnpm', 'tsc', 'mypy')
+            
+        Returns:
+            True if tool is found in PATH, False otherwise
+        """
+        tool_path = shutil.which(tool)
+        return tool_path is not None
+
     def _verify_env_vars(self) -> None:
         """Verify required environment variables are set"""
         missing = []

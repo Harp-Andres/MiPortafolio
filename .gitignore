@@ -45,3 +45,9 @@ build
 
 # Development Documentation (Local Only)
 .dev-docs
+
+# Maestro agent runtime artifacts
+agent/.checkpoints/
+agent/.state/
+agent/.venv/
+

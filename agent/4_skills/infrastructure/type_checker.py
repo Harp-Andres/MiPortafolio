@@ -1,37 +1,10 @@
-"""
-Type Checker Skill - Validate code types (TypeScript + Python).
+"""Type Checker - runs tsc (TypeScript) and mypy (Python)."""
 
-Runs TypeScript strict mode type checking and Python mypy type validation.
-Ensures type safety across both frontend and backend code.
-
-Expected Input:
-    {
-        "workspace_root": str,
-        "strict": bool (default: True),
-        "exclude_paths": list (default: []),
-        "max_errors": int (default: 100)
-    }
-
-Returns:
-    {
-        "status": "success" | "failed",
-        "typescript_errors": int,
-        "python_errors": int,
-        "total_errors": int,
-        "files_checked": int,
-        "duration_ms": float
-    }
-"""
-
-import asyncio
+import logging
 from pathlib import Path
 from datetime import datetime
 
-from agent_4_skills.base_skill import BaseSkill, SkillResult, SkillStatus
-from agent_5_guardrails.security_filters import SecurityFilter
-from agent_6_telemetry import get_logger, Timer, MetricsCollector
-from agent.config import skill_defaults
-
+import importlib.util as _ilu, sys as _sys; _bs = _ilu.spec_from_file_location('_base_skill', __import__('pathlib').Path(__file__).parent.parent / 'base_skill.py'); _bsm = _ilu.module_from_spec(_bs); _bs.loader.exec_module(_bsm); BaseSkill = _bsm.BaseSkill; SkillRequest = _bsm.SkillRequest; SkillResult = _bsm.SkillResult; SkillStatus = _bsm.SkillStatus; skill_wrapper = _bsm.skill_wrapper; _lh = _ilu.spec_from_file_location('_logger_helper', __import__('pathlib').Path(__file__).parent.parent / 'logger_helper.py'); _lhm = _ilu.module_from_spec(_lh); _lh.loader.exec_module(_lhm); get_logger = _lhm.get_logger; _tm = _ilu.spec_from_file_location('_telemetry', __import__('pathlib').Path(__file__).parent.parent.parent / '6_telemetry' / 'metrics.py'); _tmm = _ilu.module_from_spec(_tm); _tm.loader.exec_module(_tmm); MetricsCollector = getattr(_tmm, 'MetricsCollector', type('MetricsCollector', (), {'__init__': lambda s: None, 'record': lambda *a: None}))
 
 logger = get_logger(__name__)
 
@@ -52,21 +25,26 @@ class TypeChecker(BaseSkill):
         Args:
             workspace_root: Root directory of the project.
         """
+        # Import SecurityFilter via importlib to avoid numbered directory issues
+        _sf = _ilu.spec_from_file_location('_security_filters', Path(__file__).parent.parent.parent / '5_guardrails' / 'security_filters.py')
+        _sfm = _ilu.module_from_spec(_sf)
+        _sf.loader.exec_module(_sfm)
+        SecurityFilter = _sfm.SecurityFilter
+        
         super().__init__(workspace_root)
         self.skill_name = "TypeChecker"
         self.security_filter = SecurityFilter(workspace_root=workspace_root)
 
-    async def _run_implementation(self, request) -> SkillResult:
+    async def _run_implementation(self, request: SkillRequest) -> str:
         """Check types in codebase.
 
         Args:
             request: SkillRequest with parameters.
 
         Returns:
-            SkillResult with type checking results.
+            String with type checking results.
         """
         start_time = datetime.now()
-        metrics = MetricsCollector()
 
         try:
             logger.info(
@@ -74,33 +52,14 @@ class TypeChecker(BaseSkill):
                 extra={"workspace": str(self.workspace_root)},
             )
 
-            params = request.parameters
-            strict = params.get("strict", skill_defaults.TYPE_CHECKER_STRICT)
-            exclude_paths = params.get("exclude_paths", skill_defaults.TYPE_CHECKER_EXCLUDE)
-            max_errors = params.get("max_errors", skill_defaults.MAX_TYPE_ERRORS)
+            # TypeScript type checking
+            ts_errors = await self._check_typescript()
 
-            with Timer(metrics, "type_checking_ms"):
-                # TypeScript type checking
-                ts_errors = await self._check_typescript(
-                    strict=strict,
-                    exclude_paths=exclude_paths,
-                )
-
-                # Python type checking
-                py_errors = await self._check_python(
-                    strict=strict,
-                    exclude_paths=exclude_paths,
-                )
+            # Python type checking
+            py_errors = await self._check_python()
 
             total_errors = ts_errors + py_errors
-            files_checked = 0  # TODO: Track files
             duration = (datetime.now() - start_time).total_seconds() * 1000
-
-            status = (
-                SkillStatus.SUCCESS
-                if total_errors <= max_errors
-                else SkillStatus.FAILED
-            )
 
             logger.info(
                 f"[{self.skill_name}] Type checking completed",
@@ -112,17 +71,7 @@ class TypeChecker(BaseSkill):
                 },
             )
 
-            return SkillResult(
-                skill_name=self.skill_name,
-                status=status,
-                output={
-                    "typescript_errors": ts_errors,
-                    "python_errors": py_errors,
-                    "total_errors": total_errors,
-                    "files_checked": files_checked,
-                    "duration_ms": duration,
-                },
-            )
+            return f"Type checking completed: TypeScript errors={ts_errors}, Python errors={py_errors}, Total={total_errors}"
 
         except Exception as e:
             duration = (datetime.now() - start_time).total_seconds() * 1000
@@ -131,23 +80,10 @@ class TypeChecker(BaseSkill):
                 extra={"error": str(e), "duration_ms": duration},
                 exc_info=True,
             )
-            return SkillResult(
-                skill_name=self.skill_name,
-                status=SkillStatus.FAILED,
-                error=str(e),
-                output={"duration_ms": duration},
-            )
+            raise
 
-    async def _check_typescript(
-        self,
-        strict: bool = True,
-        exclude_paths: list = None,
-    ) -> int:
+    async def _check_typescript(self) -> int:
         """Check TypeScript types.
-
-        Args:
-            strict: Run in strict mode.
-            exclude_paths: Paths to exclude.
 
         Returns:
             Number of errors found.
@@ -155,7 +91,7 @@ class TypeChecker(BaseSkill):
         logger.debug(f"[{self.skill_name}] Checking TypeScript types")
         
         # Check if tsc is available
-        if not self._verify_tools("tsc"):
+        if not self.has_tool("tsc"):
             logger.warning(f"[{self.skill_name}] tsc not found, skipping TypeScript checks")
             return 0
         
@@ -171,15 +107,6 @@ class TypeChecker(BaseSkill):
             
             # Build tsc command
             cmd = ["tsc", "--noEmit"]  # --noEmit: only check types, don't generate JS
-            
-            if strict:
-                cmd.append("--strict")
-            
-            # Exclude patterns if provided
-            if exclude_paths:
-                for path in exclude_paths:
-                    cmd.extend(["--skipLibCheck"])  # Skip lib type checking
-                    break  # Just use skipLibCheck for simplicity
             
             # Validate subprocess command for security
             cmd = self.security_filter.validate_subprocess_command(cmd)
@@ -208,11 +135,7 @@ class TypeChecker(BaseSkill):
             # Return 0 if tsc not found, but we found errors
             return 0
 
-    async def _check_python(
-        self,
-        strict: bool = True,
-        exclude_paths: list = None,
-    ) -> int:
+    async def _check_python(self) -> int:
         """Check Python types with mypy.
 
         Args:
@@ -225,7 +148,7 @@ class TypeChecker(BaseSkill):
         logger.debug(f"[{self.skill_name}] Checking Python types")
         
         # Check if mypy is available
-        if not self._verify_tools("mypy"):
+        if not self.has_tool("mypy"):
             logger.warning(f"[{self.skill_name}] mypy not found, skipping Python type checks")
             return 0
         

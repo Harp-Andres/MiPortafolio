@@ -125,22 +125,22 @@ VALIDATION_CHECKLIST = [
     },
     {
         "name": "pyproject.toml",
-        "check": lambda: Path("pyproject.toml").exists(),
+        "check": lambda: (get_project_root() / "agent" / "pyproject.toml").exists(),
         "fix": "Create pyproject.toml in project root"
     },
     {
         "name": ".mcp.json",
-        "check": lambda: Path(".mcp.json").exists(),
+        "check": lambda: (get_project_root() / ".mcp.json").exists(),
         "fix": "Generate .mcp.json for IDE integration"
     },
     {
         "name": ".github/copilot-instructions.md",
-        "check": lambda: Path(".github/copilot-instructions.md").exists(),
+        "check": lambda: (get_project_root() / ".github" / "copilot-instructions.md").exists(),
         "fix": "Generate copilot-instructions.md"
     },
     {
         "name": ".env.example",
-        "check": lambda: Path(".env.example").exists(),
+        "check": lambda: (get_project_root() / "agent" / ".env.example").exists(),
         "fix": "Generate .env.example with required vars"
     },
     {

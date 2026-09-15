@@ -1,9 +1,7 @@
 """API Validator Skill - Validate API schema and responses."""
 import asyncio
 from datetime import datetime
-from agent_4_skills.base_skill import BaseSkill, SkillResult, SkillStatus
-from agent_5_guardrails.security_filters import SecurityFilter
-from agent_6_telemetry import get_logger
+import importlib.util as _ilu, sys as _sys; _bs = _ilu.spec_from_file_location('_base_skill', __import__('pathlib').Path(__file__).parent.parent / 'base_skill.py'); _bsm = _ilu.module_from_spec(_bs); _bs.loader.exec_module(_bsm); BaseSkill = _bsm.BaseSkill; SkillRequest = _bsm.SkillRequest; SkillResult = _bsm.SkillResult; SkillStatus = _bsm.SkillStatus; skill_wrapper = _bsm.skill_wrapper; _lh = _ilu.spec_from_file_location('_logger_helper', __import__('pathlib').Path(__file__).parent.parent / 'logger_helper.py'); _lhm = _ilu.module_from_spec(_lh); _lh.loader.exec_module(_lhm); get_logger = _lhm.get_logger
 
 logger = get_logger(__name__)
 

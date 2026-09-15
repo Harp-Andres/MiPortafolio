@@ -1,0 +1,4 @@
+  File "E:\UnidadPrincipal\Documentos\Repos\MiPortafolio\agent\1_interface\mcp_server.py", line 204
+    break
+    ^^^^^
+SyntaxError: 'break' outside loop

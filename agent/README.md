@@ -43,6 +43,11 @@ uv run python -m 1_interface.cli --help
 
 **That's it!** The agent is now ready to use.
 
+## Guía Operativa
+
+- Guía principal para inicializar y operar en equipo nuevo: `docs/GUIA_USO_AGENTE.md`
+- Plan/scaffold de verificación de Phase 2 (sin implementación): `docs/PHASE2_SETUP_PLAN.md` (se genera con `uv run agent --setup-phase2-agent`)
+
 ---
 
 ## 🏗️ Architecture Overview

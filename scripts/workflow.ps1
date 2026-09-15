@@ -10,7 +10,7 @@ param(
     [string]$Branch = 'refactor/complete-monorepo-restructuring',
     
     [Parameter(Mandatory=$false)]
-    [int]$RunId,
+    [long]$RunId,
     
     [Parameter(Mandatory=$false)]
     [switch]$Wait
@@ -41,7 +41,7 @@ switch ($Command) {
     
     'status' {
         Write-Host "📊 Workflow status for branch: $Branch" -ForegroundColor Cyan
-        gh workflow view deploy.yml -r $Branch
+        gh run list --repo $RepoOwner/$RepoName --branch $Branch --limit 1
     }
     
     'logs' {

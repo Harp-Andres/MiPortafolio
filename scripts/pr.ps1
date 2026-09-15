@@ -19,7 +19,7 @@ param(
     [string]$Body = '',
     
     [Parameter(Mandatory=$false)]
-    [string]$PRNumber
+    [long]$PRNumber
 )
 
 $ErrorActionPreference = 'Stop'

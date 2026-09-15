@@ -381,6 +381,61 @@ def is_development() -> bool:
     return project_config.ENVIRONMENT == Environment.DEVELOPMENT
 
 
+# ============================================================================
+# LOGGER INITIALIZATION
+# ============================================================================
+
+def get_logger(name: str = "agent"):
+    """
+    Get a configured logger instance.
+    
+    Args:
+        name: Logger name (typically __name__ or skill name)
+    
+    Returns:
+        Configured logger instance
+    """
+    import logging
+    from logging.handlers import RotatingFileHandler
+    
+    # Create logger
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
+    
+    # Avoid duplicate handlers
+    if logger.handlers:
+        return logger
+    
+    # Console handler (stderr)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_format = logging.Formatter(
+        "[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    console_handler.setFormatter(console_format)
+    logger.addHandler(console_handler)
+    
+    # File handler (rotating)
+    log_dir = project_config.LOG_DIR
+    log_dir.mkdir(parents=True, exist_ok=True)
+    
+    file_handler = RotatingFileHandler(
+        log_dir / f"{name}.log",
+        maxBytes=10485760,  # 10 MB
+        backupCount=5
+    )
+    file_handler.setLevel(logging.DEBUG)
+    file_format = logging.Formatter(
+        "[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    file_handler.setFormatter(file_format)
+    logger.addHandler(file_handler)
+    
+    return logger
+
+
 __all__ = [
     "ProjectConfig",
     "SkillDefaults",
@@ -402,6 +457,7 @@ __all__ = [
     "get_config",
     "get_project_path",
     "get_output_path",
+    "get_logger",
     "is_production",
     "is_development",
 ]

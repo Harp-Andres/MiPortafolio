@@ -401,6 +401,154 @@ def env_check(
 
 
 # ============================================================================
+# SETUP & INFRASTRUCTURE COMMANDS (Setup Agent)
+# ============================================================================
+
+@app.command(name="setup-init")
+def setup_init() -> None:
+    """
+    Initialize portable agentic ecosystem
+    
+    Generates:
+    - .env.example with all required variables
+    - .mcp.json for IDE/Copilot integration
+    - Agent layer directories and __init__.py
+    - Validation checklist
+    
+    Example:
+      mportafolio-agent setup-init
+    """
+    from agent_setup_agent import setup_init as setup_agent_init
+    
+    console.print("\n[bold cyan]🚀 Initializing Portable Agentic Ecosystem[/bold cyan]\n")
+    
+    try:
+        setup_agent_init()
+        console.print("[bold green]✅ Setup Complete![/bold green]\n")
+    except Exception as e:
+        console.print(f"\n❌ Setup failed: {e}\n", style="bold red")
+        sys.exit(1)
+
+
+@app.command(name="setup-status")
+def setup_status() -> None:
+    """
+    Display setup status and architecture
+    
+    Shows:
+    - 7-layer architecture diagram
+    - Validation checklist (pass/fail)
+    - Configuration summary
+    
+    Example:
+      mportafolio-agent setup-status
+    """
+    from agent_setup_agent import status
+    
+    try:
+        status()
+    except Exception as e:
+        console.print(f"\n❌ Status check failed: {e}\n", style="bold red")
+        sys.exit(1)
+
+
+@app.command(name="setup-validate")
+def setup_validate() -> None:
+    """
+    Validate all infrastructure components
+    
+    Checks:
+    - 7-layer directory structure
+    - Configuration files
+    - Environment variables
+    - MCP server configuration
+    
+    Example:
+      mportafolio-agent setup-validate
+    """
+    from agent_setup_agent import validate
+    
+    try:
+        validate()
+    except Exception as e:
+        console.print(f"\n❌ Validation failed: {e}\n", style="bold red")
+        sys.exit(1)
+
+
+@app.command(name="setup-mcp-check")
+def setup_mcp_check() -> None:
+    """
+    Verify MCP server registration
+    
+    Validates:
+    - .mcp.json exists and is valid JSON
+    - Server command is executable
+    - Supported IDEs listed
+    
+    Example:
+      mportafolio-agent setup-mcp-check
+    """
+    from agent_setup_agent import check_mcp
+    
+    try:
+        check_mcp()
+    except Exception as e:
+        console.print(f"\n❌ MCP check failed: {e}\n", style="bold red")
+        sys.exit(1)
+
+
+@app.command(name="setup-list-skills")
+def setup_list_skills() -> None:
+    """
+    List all registered skills by domain
+    
+    Domains:
+    - testing: Unit & E2E test runners
+    - building: Build & compilation skills
+    - quality: Linting, formatting, type checking
+    - deployment: GitHub Pages, release management
+    - documents: PDF, DOCX, Excel generation
+    - infrastructure: GitHub, workflows, CI/CD
+    
+    Example:
+      mportafolio-agent setup-list-skills
+    """
+    from agent_setup_agent import list_skills
+    
+    try:
+        list_skills()
+    except Exception as e:
+        console.print(f"\n❌ List skills failed: {e}\n", style="bold red")
+        sys.exit(1)
+
+
+@app.command(name="setup-show-architecture")
+def setup_show_architecture() -> None:
+    """
+    Display 7-layer architecture in detail
+    
+    Shows:
+    - Layer 1: Interface (CLI + MCP Server)
+    - Layer 2: Orchestrator (ReAct + LLM Factory)
+    - Layer 3: Memory (Conversation + RAG + Checkpoints)
+    - Layer 4: Skills (28+ autonomous skills)
+    - Layer 5: Guardrails (Security + Validation)
+    - Layer 6: Telemetry (Logging + Metrics)
+    - Layer 7: State (Persistence + Recovery)
+    
+    Example:
+      mportafolio-agent setup-show-architecture
+    """
+    from agent_setup_agent import show_architecture
+    
+    try:
+        show_architecture()
+    except Exception as e:
+        console.print(f"\n❌ Show architecture failed: {e}\n", style="bold red")
+        sys.exit(1)
+
+
+# ============================================================================
 # MAIN ENTRY POINT
 # ============================================================================
 

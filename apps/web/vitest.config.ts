@@ -38,6 +38,8 @@ export default defineConfig({
       '@types': path.resolve(__dirname, './src/types'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@mportafolio/core': path.resolve(__dirname, '../../packages/core/src'),
+      '@mportafolio/api-client': path.resolve(__dirname, '../../packages/api-client/src'),
+      '@mportafolio/ui': path.resolve(__dirname, '../../packages/ui/src'),
     }
   }
 })

@@ -148,7 +148,7 @@ class SkillDefaults:
     UPDATE_LOCKFILE: bool = False
     
     # E2E testing defaults
-    E2E_BROWSERS: List[str] = field(default_factory=lambda: ["chromium", "firefox"])
+    E2E_BROWSERS: List[str] = field(default_factory=lambda: ["chromium"])
     E2E_HEADLESS: bool = True
     
     # Retry defaults

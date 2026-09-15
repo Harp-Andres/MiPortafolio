@@ -110,7 +110,7 @@ class UnitTestRunnerRequest(BaseModel):
 
 class E2ETestRunnerRequest(BaseModel):
     """Validator for E2ETestRunner skill"""
-    browsers: List[str] = Field(default_factory=lambda: ["chromium", "firefox"], description="Browsers to test")
+    browsers: List[str] = Field(default_factory=lambda: ["chromium"], description="Browsers to test (Chrome only)")
     headless: bool = Field(default=True, description="Run in headless mode")
     
     @validator("browsers")

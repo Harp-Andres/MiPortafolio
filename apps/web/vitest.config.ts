@@ -18,6 +18,10 @@ export default defineConfig({
       'tests/e2e/',
       '**/*.spec.ts'
     ],
+    reporters: ['default', 'html'],
+    outputFile: {
+      html: '.vitest/index.html'
+    },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],

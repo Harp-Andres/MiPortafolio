@@ -2,6 +2,7 @@
 
 import json
 import pytest
+from copy import deepcopy
 from pathlib import Path
 from mportafolio_backend.generators import DocxGenerator, PDFGenerator, ExcelGenerator
 from mportafolio_backend.sync_validator import SyncValidator
@@ -242,7 +243,7 @@ class TestDocxGenerator:
         """Test generator can be initialized"""
         gen = DocxGenerator.from_dict(SAMPLE_CV)
         assert gen is not None
-        assert gen.cv_data.profile.name == "Test User"
+        assert gen.cv_data.profile.name == "ANDRES RODRIGUEZ PISA"
 
     def test_generate_creates_file(self, tmp_path):
         """Test document generation creates file"""
@@ -262,7 +263,7 @@ class TestPDFGenerator:
         """Test generator can be initialized"""
         gen = PDFGenerator.from_dict(SAMPLE_CV)
         assert gen is not None
-        assert gen.cv_data.profile.name == "Test User"
+        assert gen.cv_data.profile.name == "ANDRES RODRIGUEZ PISA"
 
     def test_generate_creates_file(self, tmp_path):
         """Test document generation creates file"""
@@ -282,7 +283,7 @@ class TestExcelGenerator:
         """Test generator can be initialized"""
         gen = ExcelGenerator.from_dict(SAMPLE_CV)
         assert gen is not None
-        assert gen.cv_data.profile.name == "Test User"
+        assert gen.cv_data.profile.name == "ANDRES RODRIGUEZ PISA"
 
     def test_generate_creates_file(self, tmp_path):
         """Test workbook generation creates file"""
@@ -313,7 +314,7 @@ class TestSyncValidator:
 
     def test_missing_profile_fails(self):
         """Test validation fails when profile is missing"""
-        invalid_data = {**SAMPLE_CV}
+        invalid_data = deepcopy(SAMPLE_CV)
         del invalid_data["profile"]["name"]
         
         report = SyncValidator.validate_dict(invalid_data)
@@ -322,7 +323,7 @@ class TestSyncValidator:
 
     def test_empty_skills_fails(self):
         """Test validation fails for empty skills"""
-        invalid_data = {**SAMPLE_CV}
+        invalid_data = deepcopy(SAMPLE_CV)
         invalid_data["skills"] = []
         
         report = SyncValidator.validate_dict(invalid_data)
@@ -488,7 +489,7 @@ class TestDataSyncAcrossFormats:
 
     def test_sync_report_detects_missing_data(self):
         """Test that sync validator detects missing data"""
-        incomplete_cv = {**SAMPLE_CV}
+        incomplete_cv = deepcopy(SAMPLE_CV)
         del incomplete_cv['experience']
         
         report = SyncValidator.validate_dict(incomplete_cv)

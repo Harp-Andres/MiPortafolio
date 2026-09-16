@@ -61,9 +61,9 @@ export const Certificates = ({ byCategory, learningPaths = [], officialCertifica
   }
 
   return (
-    <section id="certificates" className="py-16 bg-white">
+    <section id="certificates" aria-labelledby="certificates-title" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-12 text-gray-900">Certificaciones & Formación</h2>
+        <h2 id="certificates-title" className="text-3xl font-bold mb-12 text-gray-900">Certificaciones & Formación</h2>
 
         {/* CERTIFICACIONES OFICIALES */}
         {officialCertifications.length > 0 && (

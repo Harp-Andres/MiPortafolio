@@ -43,9 +43,9 @@ export const Experience = ({ items }: ExperienceProps) => {
   const recentItems = items.slice(0, 4)
   
   return (
-    <section id="experience" className="py-16 bg-white">
+    <section id="experience" aria-labelledby="experience-title" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-12 text-gray-900">Experiencia Profesional</h2>
+        <h2 id="experience-title" className="text-3xl font-bold mb-12 text-gray-900">Experiencia Profesional</h2>
         
         <div className="space-y-6">
           {recentItems.map((item, index) => (

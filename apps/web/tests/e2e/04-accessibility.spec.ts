@@ -58,8 +58,7 @@ test.describe('Accessibility E2E Tests', () => {
   })
 
   test('should have keyboard navigation', async ({ page }) => {
-    // Navega usando Tab
-    const firstLink = page.locator('a').first()
+    const firstLink = page.getByRole('link').first()
     await firstLink.focus()
 
     // Verifica que el elemento recibió focus
@@ -121,10 +120,10 @@ test.describe('Accessibility E2E Tests', () => {
 
     for (let i = 0; i < Math.min(count, 5); i++) {
       const input = inputs.nth(i)
-      const label = await input.locator('.. >> label')
+      const inputId = await input.getAttribute('id')
+      const label = inputId ? page.locator(`label[for="${inputId}"]`) : page.locator('label').filter({ has: input })
 
       if (await label.count() === 0) {
-        // Si no hay label, debe haber aria-label
         const ariaLabel = await input.getAttribute('aria-label')
         expect(ariaLabel).toBeTruthy()
       }
@@ -145,9 +144,8 @@ test.describe('Accessibility E2E Tests', () => {
   })
 
   test('should support focus visible styles', async ({ page }) => {
-    const link = page.locator('a[href]').first()
+    const link = page.getByRole('link').first()
 
-    // Tab para dar focus
     await link.focus()
 
     // Verifica que hay un outline o indicador visual
@@ -155,7 +153,6 @@ test.describe('Accessibility E2E Tests', () => {
       window.getComputedStyle(el).outline
     )
 
-    // Debe haber algún tipo de indicador
     expect(outline || 'visible').toBeTruthy()
   })
 
@@ -174,16 +171,8 @@ test.describe('Accessibility E2E Tests', () => {
   })
 
   test('should have proper ARIA landmarks', async ({ page }) => {
-    // Busca landmarks principales
-    const navigation = page.locator('nav')
-    const main = page.locator('main')
-    const contentInfo = page.locator('footer')
-
-    // Al menos debe haber navegación o main
-    const navCount = await navigation.count()
-    const mainCount = await main.count()
-
-    const hasLandmarks = navCount > 0 || mainCount > 0
-    expect(hasLandmarks).toBeTruthy()
+    await expect(page.getByRole('navigation', { name: /navegacion principal/i })).toBeVisible()
+    await expect(page.getByRole('main')).toBeVisible()
+    await expect(page.getByRole('contentinfo')).toBeVisible()
   })
 })

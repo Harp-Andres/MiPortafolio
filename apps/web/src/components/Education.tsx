@@ -22,9 +22,9 @@ interface EducationProps {
 
 export const Education = ({ items }: EducationProps) => {
   return (
-    <section id="education" className="py-16 bg-gray-50">
+    <section id="education" aria-labelledby="education-title" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-12 text-gray-900">Educación</h2>
+        <h2 id="education-title" className="text-3xl font-bold mb-12 text-gray-900">Educación</h2>
         
         {/* Responsive Grid: 1 col móvil (360px), 2 col tablet+ (768px+) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

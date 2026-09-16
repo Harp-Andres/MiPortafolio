@@ -38,9 +38,9 @@ export const Skills = ({ categories }: SkillsProps) => {
   })
 
   return (
-    <section id="skills" className="py-16 bg-gray-50">
+    <section id="skills" aria-labelledby="skills-title" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-12 text-gray-900">Habilidades Profesionales</h2>
+        <h2 id="skills-title" className="text-3xl font-bold mb-12 text-gray-900">Habilidades Profesionales</h2>
         
         {/* Responsive Grid: 1 col móvil (360px), 2 col tablet (768px), 3 col desktop (1024px+) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">

@@ -11,18 +11,17 @@ export const downloadCV = async (format: 'ats' | 'visual'): Promise<void> => {
   try {
     // Rutas a los PDFs generados
     const cvPath = format === 'ats' 
-      ? '/cv/HV_2026_2_ATS_AndesRodriguez.pdf'
+      ? '/cv/HV_2026_2_ATS_AndresRodriguez.pdf'
       : '/cv/HV_2026_2_Visual_AndresRodriguez.pdf'
 
     const filename = format === 'ats'
-      ? 'HV_2026_ATS_AndesRodriguez.pdf'
-      : 'HV_2026_Visual_AndresRodriguez.pdf'
+      ? 'HV_2026_2_ATS_AndresRodriguez.pdf'
+      : 'HV_2026_2_Visual_AndresRodriguez.pdf'
 
     // Crear elemento de descarga
     const link = document.createElement('a')
     link.href = cvPath
     link.download = filename
-    link.target = '_blank'
     
     document.body.appendChild(link)
     link.click()

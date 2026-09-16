@@ -14,13 +14,13 @@ export const About = ({ email, phone, location, linkedin, birthDate, about }: Ab
   const age = useAge(birthDate)
 
   return (
-    <section id="about" className="py-16 bg-white">
+    <section id="about" aria-labelledby="about-title" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           
           {/* About Text */}
           <div className="animate-slideUp">
-            <h2 className="text-3xl font-bold mb-6 text-gray-900">Sobre Mí</h2>
+            <h2 id="about-title" className="text-3xl font-bold mb-6 text-gray-900">Sobre Mí</h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               {about}
             </p>

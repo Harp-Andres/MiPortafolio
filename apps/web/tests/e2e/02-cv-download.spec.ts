@@ -1,103 +1,78 @@
 import { test, expect } from '@playwright/test'
-import path from 'path'
+import { promises as fs } from 'node:fs'
+import path from 'node:path'
 
 test.describe('CV Download E2E Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
   })
 
-  test('should have download CV button', async ({ page }) => {
-    // Busca el botón de descargar CV
-    const downloadButton = page.locator('[data-testid="download-cv"]')
-    await expect(downloadButton).toBeVisible()
-    await expect(downloadButton).toBeEnabled()
+  test('should expose semantic download trigger and dialog', async ({ page }) => {
+    const trigger = page.getByRole('button', { name: /hoja de vida descargable/i }).first()
+    await expect(trigger).toBeVisible()
+    await expect(trigger).toBeEnabled()
+
+    await trigger.click()
+
+    const dialog = page.getByRole('dialog', { name: /descargar hoja de vida/i })
+    await expect(dialog).toBeVisible()
+    await expect(dialog.getByText(/selecciona el formato/i)).toBeVisible()
   })
 
-  test('should download PDF CV successfully', async ({ page, context }) => {
-    // Promete para esperar a la descarga
-    const downloadPromise = context.waitForEvent('download')
+  test('should download PDF CV successfully', async ({ page }) => {
+    await page.getByRole('button', { name: /hoja de vida descargable/i }).first().click()
+    const atsLink = page.getByRole('link', { name: /formato ats pdf/i })
+    await expect(atsLink).toHaveAttribute('download', /\.pdf$/i)
 
-    // Click en el botón de descargar PDF
-    const pdfButton = page.locator('[data-testid="download-cv-pdf"]')
-    await pdfButton.click()
+    const href = await atsLink.getAttribute('href')
+    expect(href).toBeTruthy()
+    expect(href).toMatch(/^\/cv\/.*\.pdf$/i)
+    await atsLink.click()
 
-    // Espera a que se complete la descarga
-    const download = await downloadPromise
-    expect(download.suggestedFilename()).toContain('.pdf')
+    const localPath = path.join(process.cwd(), 'public', href!.replace(/^\//, ''))
+    const stat = await fs.stat(localPath)
+    expect(stat.size).toBeGreaterThan(0)
 
-    // Verifica que el archivo fue descargado
-    const filePath = await download.path()
-    expect(filePath).toBeTruthy()
+    const body = await fs.readFile(localPath)
+    expect(body.byteLength).toBeGreaterThan(0)
+    expect(body.subarray(0, 4).toString()).toBe('%PDF')
   })
 
-  test('should download DOCX CV successfully', async ({ page, context }) => {
-    // Promete para esperar a la descarga
-    const downloadPromise = context.waitForEvent('download')
+  test('should download visual PDF CV successfully', async ({ page }) => {
+    await page.getByRole('button', { name: /hoja de vida descargable/i }).first().click()
 
-    // Click en el botón de descargar DOCX
-    const docxButton = page.locator('[data-testid="download-cv-docx"]')
-    await docxButton.click()
+    const visualLink = page.getByRole('link', { name: /formato visual pdf/i })
+    await expect(visualLink).toHaveAttribute('download', /\.pdf$/i)
 
-    // Espera a que se complete la descarga
-    const download = await downloadPromise
-    expect(download.suggestedFilename()).toContain('.docx')
+    const href = await visualLink.getAttribute('href')
+    expect(href).toBeTruthy()
+    expect(href).toMatch(/^\/cv\/.*\.pdf$/i)
+    await visualLink.click()
+
+    const localPath = path.join(process.cwd(), 'public', href!.replace(/^\//, ''))
+    const stat = await fs.stat(localPath)
+    expect(stat.size).toBeGreaterThan(0)
+
+    const body = await fs.readFile(localPath)
+    expect(body.byteLength).toBeGreaterThan(0)
+    expect(body.subarray(0, 4).toString()).toBe('%PDF')
   })
 
-  test('should show loading state during download', async ({ page }) => {
-    // Click en descargar
-    const downloadButton = page.locator('[data-testid="download-cv"]')
-    await downloadButton.click()
+  test('should expose both semantic format options in dialog', async ({ page }) => {
+    await page.getByRole('button', { name: /hoja de vida descargable/i }).first().click()
 
-    // Verifica que hay un loading state
-    const loadingState = page.locator('[data-testid="download-loading"]')
-    await expect(loadingState).toBeVisible({ timeout: 5000 })
+    const dialog = page.getByRole('dialog', { name: /descargar hoja de vida/i })
+    await expect(dialog.getByRole('link', { name: /formato ats pdf/i })).toBeVisible()
+    await expect(dialog.getByRole('link', { name: /formato visual pdf/i })).toBeVisible()
   })
 
-  test('should have multiple format options', async ({ page }) => {
-    // Busca los botones de descarga
-    const downloadButtons = page.locator('[data-testid^="download-cv-"]')
+  test('should close download dialog with close semantic button', async ({ page }) => {
+    await page.getByRole('button', { name: /hoja de vida descargable/i }).first().click()
 
-    // Verifica que hay al menos 2 opciones (PDF y DOCX)
-    const count = await downloadButtons.count()
-    expect(count).toBeGreaterThanOrEqual(2)
-  })
+    const dialog = page.getByRole('dialog', { name: /descargar hoja de vida/i })
+    await expect(dialog).toBeVisible()
 
-  test('should show download success message', async ({ page }) => {
-    // Click en descargar
-    const downloadButton = page.locator('[data-testid="download-cv"]')
-    await downloadButton.click()
-
-    // Espera por el mensaje de éxito
-    const successMessage = page.locator('[data-testid="download-success"]')
-    await expect(successMessage).toBeVisible({ timeout: 10000 })
-  })
-
-  test('should maintain download history', async ({ page }) => {
-    // Descarga múltiples veces
-    const downloadButton = page.locator('[data-testid="download-cv"]')
-
-    for (let i = 0; i < 3; i++) {
-      await downloadButton.click()
-      await page.waitForTimeout(500)
-    }
-
-    // Verifica que el botón sigue funcionando
-    await expect(downloadButton).toBeEnabled()
-  })
-
-  test('should have download button in hero section', async ({ page }) => {
-    // Verifica que el botón está visible sin scroll
-    const heroDownloadButton = page.locator('[data-testid="hero-download-btn"]')
-    await expect(heroDownloadButton).toBeVisible()
-    await expect(heroDownloadButton).toBeInViewport()
-  })
-
-  test('should have download button in About section', async ({ page }) => {
-    // Navega a About
-    await page.click('a[href="#about"]')
-
-    // Verifica que el botón está disponible
-    const aboutDownloadButton = page.locator('[data-testid="about-download-btn"]')
-    await expect(aboutDownloadButton).toBeVisible()
+    await page.getByRole('button', { name: /cerrar dialogo de descarga/i }).click()
+    await expect(dialog).toBeHidden()
   })
 })

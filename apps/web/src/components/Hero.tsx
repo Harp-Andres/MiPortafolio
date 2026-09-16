@@ -5,10 +5,10 @@ interface HeroProps {
 
 export const Hero = ({ name, title }: HeroProps) => {
   return (
-    <div className="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section id="inicio" aria-labelledby="hero-title" className="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center py-12 animate-slideUp">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+          <h1 id="hero-title" className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
             {name}
           </h1>
           <h2 className="text-xl md:text-3xl text-blue-600 font-semibold mb-8">
@@ -20,6 +20,6 @@ export const Hero = ({ name, title }: HeroProps) => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

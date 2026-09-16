@@ -24,15 +24,23 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
   ]
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+    <nav
+      aria-label="Navegacion principal"
+      className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-black shadow-lg' : 'bg-black'
-    }`}>
+    }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-white font-bold text-xl">
+            <Link
+              to="/"
+              aria-label="Ir al inicio"
+              className="text-white font-bold text-xl"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}
+            >
               INICIO
             </Link>
           </div>
@@ -69,7 +77,10 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-300 hover:text-white"
+              aria-label={isOpen ? 'Cerrar menu principal' : 'Abrir menu principal'}
+              aria-expanded={isOpen}
+              aria-controls="menu-principal-movil"
+              className="p-2 text-gray-300 hover:text-white"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -78,7 +89,7 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4">
+          <div id="menu-principal-movil" className="md:hidden pb-4">
             <div className="space-y-2">
               {navLinks.map(link => (
                 link.isRoute ? (

@@ -6,7 +6,7 @@ import {
   Education,
   Certificates,
 } from '@/components'
-import { CV_DATA } from '@mportafolio/core'
+import { CV_DATA } from '@/utils/cv-data'
 
 interface HomeProps {
   onDownloadATS: () => void

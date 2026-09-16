@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 0 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? Number(process.env.PLAYWRIGHT_WORKERS ?? 2) : undefined,
   timeout: 30000, // 30 seconds per test
   expect: {
     timeout: 10000, // 10 seconds for assertions
@@ -22,6 +22,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     navigationTimeout: 10000, // 10 seconds for navigation
+    acceptDownloads: true,
   },
 
   projects: [

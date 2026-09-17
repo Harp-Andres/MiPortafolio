@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Hero,
   About,
@@ -14,6 +16,17 @@ interface HomeProps {
 }
 
 export const Home = (_props: HomeProps) => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const state = location.state as { scrollTo?: string } | null
+    if (state?.scrollTo) {
+      document.getElementById(state.scrollTo)?.scrollIntoView({ behavior: 'smooth' })
+      navigate(location.pathname, { replace: true, state: null })
+    }
+  }, [location, navigate])
+
   return (
     <main>
       <Hero name={CV_DATA.name} title={CV_DATA.title} />

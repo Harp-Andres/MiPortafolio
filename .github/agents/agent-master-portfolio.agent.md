@@ -1,6 +1,6 @@
 ---
 description: "Master orchestrator for the MiPortafolio monorepo. Use when a task needs delegation across CV/docs, testing, deployment, CI/CD, architecture, SDET, platform, or OS concerns, or when coordinating a multi-domain change. Trigger phrases: orchestrate, coordinate, full pipeline, portfolio update, delegate."
-tools: [read, edit, execute, search, agent, todo]
+tools: [execute, read, agent, edit, search, web, 'playwright/*', browser, 'pylance-mcp-server/*', todo]
 agents: [portfolio-cv-manager, portfolio-test-manager, portfolio-deployment-manager, github-cicd-manager, setup-portability-manager, devops-cicd-manager, software-architecture-manager, sdet-quality-manager, platform-architecture-manager, os-platform-manager]
 argument-hint: "A task to implement, review, or delegate (e.g. 'fix the CV download test', 'update the deploy workflow')."
 ---

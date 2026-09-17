@@ -40,3 +40,5 @@ export type { UseDocumentsState, UseDocumentsReturn } from './useDocuments'
 
 export { useSync } from './useSync'
 export type { UseSyncState, UseSyncReturn } from './useSync'
+
+export { useSectionNavigation } from './useSectionNavigation'

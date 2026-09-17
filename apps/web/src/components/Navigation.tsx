@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useScrollPosition } from '../hooks'
+import { useScrollPosition, useSectionNavigation } from '../hooks'
 import { CVDownloads } from './CVDownloads'
 
 interface NavProps {
@@ -12,14 +12,18 @@ interface NavProps {
 export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const isScrolled = useScrollPosition()
+  const { goToSection } = useSectionNavigation()
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
-  const navLinks = [
-    { label: 'Sobre Mi', href: '/#about', isRoute: false },
-    { label: 'Habilidades', href: '/#skills', isRoute: false },
-    { label: 'Experiencia', href: '/#experience', isRoute: false },
-    { label: 'Educacion', href: '/#education', isRoute: false },
+  const navLinks: (
+    | { label: string; sectionId: string; isRoute: false }
+    | { label: string; href: string; isRoute: true }
+  )[] = [
+    { label: 'Sobre Mi', sectionId: 'about', isRoute: false },
+    { label: 'Habilidades', sectionId: 'skills', isRoute: false },
+    { label: 'Experiencia', sectionId: 'experience', isRoute: false },
+    { label: 'Educacion', sectionId: 'education', isRoute: false },
     { label: 'Proyectos', href: '/portafolio', isRoute: true },
   ]
 
@@ -46,24 +50,25 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map(link => (
               link.isRoute ? (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-gray-300 hover:text-white transition-colors font-semibold"
+                  className="whitespace-nowrap text-gray-300 hover:text-white transition-colors font-semibold"
                 >
                   {link.label}
                 </Link>
               ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors"
+                <button
+                  key={link.sectionId}
+                  type="button"
+                  onClick={goToSection(link.sectionId)}
+                  className="whitespace-nowrap text-gray-300 hover:text-white transition-colors"
                 >
                   {link.label}
-                </a>
+                </button>
               )
             ))}
           </div>
@@ -102,14 +107,17 @@ export const Navigation = ({ onDownloadATS, onDownloadVisual }: NavProps) => {
                     {link.label}
                   </Link>
                 ) : (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-                    onClick={() => setIsOpen(false)}
+                  <button
+                    key={link.sectionId}
+                    type="button"
+                    onClick={(event) => {
+                      goToSection(link.sectionId)(event)
+                      setIsOpen(false)
+                    }}
+                    className="block w-full text-left px-3 py-2 text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 )
               ))}
               <div className="pt-4 px-3">

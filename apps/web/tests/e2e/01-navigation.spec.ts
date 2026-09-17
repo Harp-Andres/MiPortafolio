@@ -13,50 +13,51 @@ test.describe('Navigation E2E Tests', () => {
   })
 
   test('should navigate to About section', async ({ page }) => {
-    await page.getByRole('heading', { level: 2, name: /sobre m[ií]/i }).scrollIntoViewIfNeeded()
-    await expect(page.getByRole('heading', { level: 2, name: /sobre m[ií]/i })).toBeVisible()
+    const nav = page.getByRole('navigation', { name: /navegacion principal/i })
+    await nav.getByRole('button', { name: /sobre mi/i }).click()
+    await expect(page.getByRole('heading', { level: 2, name: /sobre m[ií]/i })).toBeInViewport()
   })
 
   test('should navigate to Skills section', async ({ page }) => {
-    await page.getByRole('heading', { level: 2, name: /habilidades profesionales/i }).scrollIntoViewIfNeeded()
-    await expect(page.getByRole('heading', { level: 2, name: /habilidades profesionales/i })).toBeVisible()
+    const nav = page.getByRole('navigation', { name: /navegacion principal/i })
+    await nav.getByRole('button', { name: /habilidades/i }).click()
+    await expect(page.getByRole('heading', { level: 2, name: /habilidades profesionales/i })).toBeInViewport()
   })
 
   test('should navigate to Experience section', async ({ page }) => {
-    await page.getByRole('heading', { level: 2, name: /experiencia profesional/i }).scrollIntoViewIfNeeded()
-    await expect(page.getByRole('heading', { level: 2, name: /experiencia profesional/i })).toBeVisible()
+    const nav = page.getByRole('navigation', { name: /navegacion principal/i })
+    await nav.getByRole('button', { name: /experiencia/i }).click()
+    await expect(page.getByRole('heading', { level: 2, name: /experiencia profesional/i })).toBeInViewport()
   })
 
   test('should navigate to Projects section', async ({ page }) => {
-    await page.getByRole('link', { name: /proyectos/i }).first().click()
+    const nav = page.getByRole('navigation', { name: /navegacion principal/i })
+    await nav.getByRole('link', { name: /proyectos/i }).click()
     await expect(page).toHaveURL(/#\/portafolio/)
     await expect(page.getByRole('heading', { level: 1, name: /portfolio de proyectos/i })).toBeVisible()
   })
 
   test('should navigate to Education section', async ({ page }) => {
-    await page.getByRole('heading', { level: 2, name: /educaci[oó]n/i }).scrollIntoViewIfNeeded()
-    await expect(page.getByRole('heading', { level: 2, name: /educaci[oó]n/i })).toBeVisible()
+    const nav = page.getByRole('navigation', { name: /navegacion principal/i })
+    await nav.getByRole('button', { name: /educacion/i }).click()
+    await expect(page.getByRole('heading', { level: 2, name: /educaci[oó]n/i })).toBeInViewport()
   })
 
   test('should scroll to top when clicking logo/home', async ({ page }) => {
-    await page.getByRole('heading', { level: 2, name: /experiencia profesional/i }).scrollIntoViewIfNeeded()
-    let scrollTop = await page.evaluate(() => window.scrollY)
-    expect(scrollTop).toBeGreaterThan(0)
+    const nav = page.getByRole('navigation', { name: /navegacion principal/i })
+    await nav.getByRole('button', { name: /experiencia/i }).click()
+    await expect(page.getByRole('heading', { level: 2, name: /experiencia profesional/i })).toBeInViewport()
 
-    await page.getByRole('link', { name: /inicio/i }).first().click()
-    scrollTop = await page.evaluate(() => window.scrollY)
-    expect(scrollTop).toBeLessThan(100)
+    await nav.getByRole('link', { name: /inicio/i }).click()
+    await expect(page.getByRole('heading', { level: 1 })).toBeInViewport()
   })
 
   test('should have proper navigation links structure', async ({ page }) => {
     const nav = page.getByRole('navigation', { name: /navegacion principal/i })
-    const navLinks = nav.getByRole('link').filter({ hasText: /sobre mi|habilidades|experiencia|educacion|proyectos/i })
-    const count = await navLinks.count()
-    expect(count).toBeGreaterThan(0)
-
-    for (let i = 0; i < count; i++) {
-      const href = await navLinks.nth(i).getAttribute('href')
-      expect(href).toBeTruthy()
-    }
+    await expect(nav.getByRole('button', { name: /sobre mi/i })).toBeVisible()
+    await expect(nav.getByRole('button', { name: /habilidades/i })).toBeVisible()
+    await expect(nav.getByRole('button', { name: /experiencia/i })).toBeVisible()
+    await expect(nav.getByRole('button', { name: /educacion/i })).toBeVisible()
+    await expect(nav.getByRole('link', { name: /proyectos/i })).toBeVisible()
   })
 })

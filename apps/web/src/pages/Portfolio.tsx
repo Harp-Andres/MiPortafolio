@@ -1,9 +1,11 @@
 import { PROJECTS } from '@mportafolio/core'
 import { ExternalLink, Code } from 'lucide-react'
+import { useSectionNavigation } from '@/hooks'
 
 export const Portfolio = () => {
   const featuredProjects = PROJECTS.filter(p => p.type === 'featured')
   const secondaryProjects = PROJECTS.filter(p => p.type === 'secondary')
+  const { goToSection } = useSectionNavigation()
 
   return (
     <div className="min-h-screen bg-white pt-20">
@@ -187,12 +189,13 @@ export const Portfolio = () => {
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Tengo experiencia en SDET, QA Automation, Testing y DevOps. Siempre abierto a nuevas oportunidades.
           </p>
-          <a
-            href="/#sobre-mi"
+          <button
+            type="button"
+            onClick={goToSection('about')}
             className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors"
           >
             Contactar
-          </a>
+          </button>
         </div>
       </section>
     </div>

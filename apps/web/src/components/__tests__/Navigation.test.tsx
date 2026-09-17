@@ -46,24 +46,24 @@ describe('Navigation Component', () => {
         onDownloadVisual={mockOnDownloadVisual} 
       />
     )
-    const aboutLink = screen.getByText('Sobre Mi').closest('a')
-    expect(aboutLink).toHaveAttribute('href', '/#about')
+    const aboutButton = screen.getByRole('button', { name: /sobre mi/i })
+    expect(aboutButton).toBeInTheDocument()
   })
 
   it('should toggle mobile menu on button click', () => {
-    const { container } = renderWithRouter(
+    renderWithRouter(
       <Navigation 
         onDownloadATS={mockOnDownloadATS} 
         onDownloadVisual={mockOnDownloadVisual} 
       />
     )
     
-    const menuButton = container.querySelector('button')
+    const menuButton = screen.getByRole('button', { name: /abrir menu principal/i })
     expect(menuButton).toBeInTheDocument()
     
-    fireEvent.click(menuButton!)
+    fireEvent.click(menuButton)
     // After click, mobile menu should appear
-    expect(screen.getAllByText('Sobre Mi').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Sobre Mi').length).toBeGreaterThan(1)
   })
 
   it('should be fixed position', () => {

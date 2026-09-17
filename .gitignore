@@ -43,6 +43,7 @@ build
 
 # Playwright
 .auth
+.playwright-mcp
 
 # Development Documentation (Local Only)
 .dev-docs

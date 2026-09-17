@@ -9,8 +9,8 @@ interface CVDownloadsProps {
 
 export const CVDownloads = ({ onDownloadATS: _onDownloadATS, onDownloadVisual: _onDownloadVisual, isLoading = false }: CVDownloadsProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const atsPath = '/cv/HV_2026_2_ATS_AndresRodriguez.pdf'
-  const visualPath = '/cv/HV_2026_2_Visual_AndresRodriguez.pdf'
+  const atsPath = `${import.meta.env.BASE_URL}cv/HV_2026_2_ATS_AndresRodriguez.pdf`
+  const visualPath = `${import.meta.env.BASE_URL}cv/HV_2026_2_Visual_AndresRodriguez.pdf`
 
   return (
     <>

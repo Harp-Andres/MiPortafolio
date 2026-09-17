@@ -9,10 +9,10 @@ interface DownloadOptions {
 
 export const downloadCV = async (format: 'ats' | 'visual'): Promise<void> => {
   try {
-    // Rutas a los PDFs generados
+    // Rutas a los PDFs generados (respeta el base path configurado en Vite)
     const cvPath = format === 'ats' 
-      ? '/cv/HV_2026_2_ATS_AndresRodriguez.pdf'
-      : '/cv/HV_2026_2_Visual_AndresRodriguez.pdf'
+      ? `${import.meta.env.BASE_URL}cv/HV_2026_2_ATS_AndresRodriguez.pdf`
+      : `${import.meta.env.BASE_URL}cv/HV_2026_2_Visual_AndresRodriguez.pdf`
 
     const filename = format === 'ats'
       ? 'HV_2026_2_ATS_AndresRodriguez.pdf'

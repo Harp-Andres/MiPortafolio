@@ -2,9 +2,9 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [ main, develop, refactor/* ]
+    branches: [ main, develop, refactor/*, fix/* ]
   pull_request:
-    branches: [ main, develop, refactor/* ]
+    branches: [ main, develop, refactor/*, fix/* ]
   workflow_dispatch:
 
 permissions:

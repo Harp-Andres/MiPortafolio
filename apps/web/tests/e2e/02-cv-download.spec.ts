@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test'
 import { promises as fs } from 'node:fs'
-import path from 'node:path'
 
 test.describe('CV Download E2E Tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -26,14 +25,20 @@ test.describe('CV Download E2E Tests', () => {
 
     const href = await atsLink.getAttribute('href')
     expect(href).toBeTruthy()
-    expect(href).toMatch(/^\/cv\/.*\.pdf$/i)
-    await atsLink.click()
+    expect(href).toMatch(/\/cv\/.*\.pdf$/i)
 
-    const localPath = path.join(process.cwd(), 'public', href!.replace(/^\//, ''))
-    const stat = await fs.stat(localPath)
-    expect(stat.size).toBeGreaterThan(0)
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      atsLink.click(),
+    ])
 
-    const body = await fs.readFile(localPath)
+    await expect(download.failure()).resolves.toBeNull()
+    expect(download.suggestedFilename()).toMatch(/\.pdf$/i)
+
+    const downloadedPath = await download.path()
+    expect(downloadedPath).toBeTruthy()
+
+    const body = await fs.readFile(downloadedPath!)
     expect(body.byteLength).toBeGreaterThan(0)
     expect(body.subarray(0, 4).toString()).toBe('%PDF')
   })
@@ -46,14 +51,20 @@ test.describe('CV Download E2E Tests', () => {
 
     const href = await visualLink.getAttribute('href')
     expect(href).toBeTruthy()
-    expect(href).toMatch(/^\/cv\/.*\.pdf$/i)
-    await visualLink.click()
+    expect(href).toMatch(/\/cv\/.*\.pdf$/i)
 
-    const localPath = path.join(process.cwd(), 'public', href!.replace(/^\//, ''))
-    const stat = await fs.stat(localPath)
-    expect(stat.size).toBeGreaterThan(0)
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      visualLink.click(),
+    ])
 
-    const body = await fs.readFile(localPath)
+    await expect(download.failure()).resolves.toBeNull()
+    expect(download.suggestedFilename()).toMatch(/\.pdf$/i)
+
+    const downloadedPath = await download.path()
+    expect(downloadedPath).toBeTruthy()
+
+    const body = await fs.readFile(downloadedPath!)
     expect(body.byteLength).toBeGreaterThan(0)
     expect(body.subarray(0, 4).toString()).toBe('%PDF')
   })

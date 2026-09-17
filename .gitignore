@@ -31,6 +31,7 @@ dist-ssr
 coverage
 test-results
 playwright-report
+.vitest
 
 # OS
 .DS_Store
@@ -42,3 +43,17 @@ build
 
 # Playwright
 .auth
+
+# Development Documentation (Local Only)
+.dev-docs
+
+# Maestro agent runtime artifacts
+agent/.checkpoints/
+agent/.state/
+agent/.venv/
+agent/*.log
+agent/*.err
+agent/output.txt
+agent/summary.txt
+workflow_log.txt
+

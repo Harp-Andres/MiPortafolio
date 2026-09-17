@@ -1,0 +1,11 @@
+README.md
+phase2_setup_agent.py
+pyproject.toml
+setup_agent.py
+setup_bootstrap_cli.py
+mportafolio_agent.egg-info/PKG-INFO
+mportafolio_agent.egg-info/SOURCES.txt
+mportafolio_agent.egg-info/dependency_links.txt
+mportafolio_agent.egg-info/entry_points.txt
+mportafolio_agent.egg-info/requires.txt
+mportafolio_agent.egg-info/top_level.txt

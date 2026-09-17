@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mportafolio-agent"
+version = "0.1.0"
+description = "Master Orchestrator Agent for Mi Portafolio"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Mi Portafolio Team", email = "portfolio@example.com"}]
+dependencies = [
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+    "mcp>=0.1.0",
+    "aiofiles>=23.0",
+    "httpx>=0.25.0",
+    "requests>=2.31.0",
+    "pytest>=7.4",
+    "pytest-asyncio>=0.21.0",
+    "gitpython>=3.1.40",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.12.0",
+    "ruff>=0.1.8",
+    "mypy>=1.7.1",
+]
+
+[project.scripts]
+mportafolio-agent = "setup_bootstrap_cli:main"
+agent = "setup_bootstrap_cli:main"
+
+[tool.setuptools]
+py-modules = ["setup_bootstrap_cli", "setup_agent", "phase2_setup_agent"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

@@ -756,13 +756,14 @@ Genera:
 
 ## 🤖 Agente de Automatización
 
-El proyecto incluye skills especializados para un agente profesional:
+El proyecto usa el sistema **Maestro** (`@maestro`), un agente orquestador multi-nivel definido en [.agent/AGENTS.md](.agent/AGENTS.md), con agentes especializados para:
 
-- **HV Generator** (`.agent/hv-generator.md`): Generación automática de CVs
-- **Testing** (`.agent/testing.md`): Suite E2E completamente automatizada
-- **Deployment** (`.agent/deployment.md`): Deploy seguro con validaciones
+- **CV/Hoja de Vida**: `portfolio-cv-manager`
+- **Testing E2E/Unitario**: `portfolio-test-manager`
+- **Deployment**: `portfolio-deployment-manager`
+- **CI/CD**: `github-cicd-manager`
 
-Ver `.instructions.md` para flujo completo del agente.
+Ver [.agent/AGENTS.md](.agent/AGENTS.md) para la jerarquía completa y [docs/MAESTRO_REFERENCE.md](docs/MAESTRO_REFERENCE.md) para la guía de uso.
 
 ## 🔒 Consideraciones de Seguridad
 

@@ -1,57 +1,52 @@
 {
-  "name": "miportafolio",
-  "version": "1.0.0",
-  "description": "Mi Portafolio",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "lint": "tsc --noEmit",
-    "generate:cv": "node scripts/hv/generate-cv-sdet.mjs"
-  },
+  "name": "miportafolio-monorepo",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-powered portfolio management monorepo - Enterprise-grade system",
+  "author": "Andrés Rodríguez Pisa",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Harp-Andres/MiPortafolio.git"
+    "url": "https://github.com/Harp-Andres/MiPortafolio.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Harp-Andres/MiPortafolio/issues"
+  "keywords": ["portfolio", "cv", "sdet", "qa-automation", "ai-agents"],
+  "scripts": {
+    "install-all": "pnpm install",
+    "dev": "pnpm -F @mportafolio/web dev",
+    "dev:web": "pnpm -F @mportafolio/web dev",
+    "dev:backend": "cd packages/backend && python -m uvicorn api.app:app --reload",
+    "build": "pnpm -F @mportafolio/web build",
+    "build:web": "pnpm -F @mportafolio/web build",
+    "build:backend": "echo 'Backend ready for deployment'",
+    "build:all": "pnpm -r build",
+    "preview": "pnpm -F @mportafolio/web preview",
+    "test": "pnpm -F @mportafolio/web test",
+    "test:web": "pnpm -F @mportafolio/web test",
+    "test:ui": "pnpm -F @mportafolio/web test:ui",
+    "test:coverage": "pnpm -F @mportafolio/web test:coverage",
+    "test:e2e": "pnpm -F @mportafolio/web test:e2e",
+    "test:e2e:ui": "pnpm -F @mportafolio/web test:e2e:ui",
+    "test:backend": "cd packages/backend && pytest",
+    "test:all": "pnpm run test:web && pnpm run test:backend",
+    "lint": "pnpm -F @mportafolio/web lint",
+    "lint:all": "pnpm -r lint",
+    "sync:verify": "node scripts/verify-sync.js",
+    "sync:validate": "pnpm run sync:verify",
+    "format": "pnpm -F @mportafolio/web format",
+    "generate:cv": "pnpm -F @mportafolio/web generate:cv",
+    "deploy:web": "pnpm run build:web",
+    "release": "pnpm run test:all && pnpm run sync:verify && pnpm run build:all"
   },
-  "homepage": "https://github.com/Harp-Andres/MiPortafolio#readme",
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
-    "@playwright/test": "^1.63.0",
-    "@tailwindcss/postcss": "^4.3.3",
-    "@testing-library/jest-dom": "^7.0.1",
-    "@testing-library/react": "^16.3.3",
-    "@types/node": "^22.20.2",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.1.1",
-    "@vitest/ui": "^5.0.0",
-    "autoprefixer": "^10.5.6",
-    "axios": "^1.20.0",
-    "docx": "^9.7.1",
-    "jsdom": "^29.1.1",
-    "lucide-react": "^1.45.0",
-    "postcss": "^8.5.28",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "tailwindcss": "^4.0.0",
-    "terser": "^5.51.2",
-    "typescript": "^7.0.2",
-    "vite": "^8.3.0",
-    "vitest": "^5.0.0"
+    "pnpm": "^9.0.0",
+    "typescript": "^7.0.2"
   },
-  "dependencies": {
-    "react-router-dom": "^7.18.3"
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   }
 }

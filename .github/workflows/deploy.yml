@@ -57,7 +57,48 @@ jobs:
       - name: Run TypeScript check
         run: pnpm -F @mportafolio/web lint
 
-  test:
+  # Runs in parallel with test-e2e (both only need `install`)
+  test-unit:
+    timeout-minutes: 10
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 12
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run unit tests (with coverage)
+        run: pnpm -F @mportafolio/web test:coverage
+
+      - name: Upload Vitest coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitest-coverage
+          path: apps/web/coverage/
+          retention-days: 7
+
+      - name: Upload Vitest HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitest-html-report
+          path: apps/web/.vitest/
+          retention-days: 7
+
+  # Runs in parallel with test-unit; Playwright itself shards its specs across 2 workers (see playwright.config.ts)
+  test-e2e:
     timeout-minutes: 15
     needs: install
     runs-on: ubuntu-latest
@@ -82,11 +123,11 @@ jobs:
       
       - name: Install Playwright browsers (Chromium only)
         run: npx playwright install --with-deps chromium
-      - name: Run unit tests
-        run: pnpm -F @mportafolio/web test
 
-      - name: Run E2E tests
+      - name: Run E2E tests (2 parallel workers)
         run: pnpm -F @mportafolio/web test:e2e
+        env:
+          PLAYWRIGHT_WORKERS: 2
 
       - name: Upload Playwright report (E2E tests)
         if: always()
@@ -96,24 +137,8 @@ jobs:
           path: apps/web/playwright-report/
           retention-days: 7
 
-      - name: Upload Vitest coverage report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: vitest-coverage
-          path: apps/web/coverage/
-          retention-days: 7
-
-      - name: Upload Vitest HTML report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: vitest-html-report
-          path: apps/web/.vitest/
-          retention-days: 7
-
   build:
-    needs: [lint, test]
+    needs: [lint, test-unit, test-e2e]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -153,12 +178,12 @@ jobs:
 
   notify:
     if: always()
-    needs: [lint, test, build]
+    needs: [lint, test-unit, test-e2e, build]
     runs-on: ubuntu-latest
     steps:
       - name: Check workflow status
         run: |
-          if [ "${{ needs.lint.result }}" == "success" ] && [ "${{ needs.test.result }}" == "success" ] && [ "${{ needs.build.result }}" == "success" ]; then
+          if [ "${{ needs.lint.result }}" == "success" ] && [ "${{ needs.test-unit.result }}" == "success" ] && [ "${{ needs.test-e2e.result }}" == "success" ] && [ "${{ needs.build.result }}" == "success" ]; then
             echo "✅ Build & Tests PASSED - Ready for deployment!"
           else
             echo "❌ Build or Tests FAILED - Review logs"

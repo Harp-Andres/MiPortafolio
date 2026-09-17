@@ -57,7 +57,7 @@ describe('Hero Component', () => {
         title="Senior QA Engineer"
       />
     )
-    const section = container.querySelector('div')
+    const section = container.querySelector('section')
     expect(section).toHaveClass('bg-gradient-to-br')
   })
 })

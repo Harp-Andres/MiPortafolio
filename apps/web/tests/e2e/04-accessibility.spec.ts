@@ -105,13 +105,12 @@ test.describe('Accessibility E2E Tests', () => {
   test('should support keyboard shortcuts', async ({ page }) => {
     // Home - ir al top
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    let scrollY = await page.evaluate(() => window.scrollY)
+    const scrollY = await page.evaluate(() => window.scrollY)
     expect(scrollY).toBeGreaterThan(0)
 
-    // Presiona Home
+    // Presiona Home (el scroll es "smooth", así que esperamos a que termine la animación)
     await page.keyboard.press('Home')
-    scrollY = await page.evaluate(() => window.scrollY)
-    expect(scrollY).toBeLessThan(100)
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(100)
   })
 
   test('should have proper form labels', async ({ page }) => {

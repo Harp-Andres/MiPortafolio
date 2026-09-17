@@ -19,13 +19,13 @@
     "generate:cv": "node scripts/hv/generate-cv-sdet.mjs"
   },
   "dependencies": {
+    "@mportafolio/api-client": "workspace:*",
+    "@mportafolio/ui": "workspace:*",
+    "axios": "^1.20.0",
+    "lucide-react": "^1.45.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-router-dom": "^7.18.3",
-    "lucide-react": "^1.45.0",
-    "axios": "^1.20.0",
-    "@mportafolio/api-client": "workspace:*",
-    "@mportafolio/ui": "workspace:*"
+    "react-router-dom": "^7.18.3"
   },
   "devDependencies": {
     "@mportafolio/core": "workspace:*",
@@ -37,6 +37,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/coverage-v8": "^5.0.1",
     "@vitest/ui": "^5.0.0",
     "autoprefixer": "^10.5.6",
     "jsdom": "^29.1.1",

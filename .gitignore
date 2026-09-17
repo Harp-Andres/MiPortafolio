@@ -31,6 +31,7 @@ dist-ssr
 coverage
 test-results
 playwright-report
+.vitest
 
 # OS
 .DS_Store

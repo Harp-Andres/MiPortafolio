@@ -8,7 +8,7 @@
 
 2. Custom Agents and Participant Handlers
 - Status: PASS
-- Evidence: .agent/AGENTS.md (master + specialized agents with commandPrefix)
+- Evidence: .github/agents/*.agent.md (master + specialized agents with descriptions)
 
 3. MCP Servers
 - Status: PASS

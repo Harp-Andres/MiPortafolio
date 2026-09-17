@@ -1044,7 +1044,7 @@ node scripts/verify-sync.js
 
 ## Architecture
 
-See `.agent/ARCHITECTURE.md` for detailed architecture.
+See `.dev-docs/architecture/ARCHITECTURE_COMPLETE.md` for detailed architecture.
 See `docs/MONOREPO_ARCHITECTURE.md` for monorepo strategy.
 
 ## Master Orchestrator
@@ -1134,7 +1134,7 @@ git push origin main
 If you encounter issues:
 
 1. Check the agent `master-orchestrator.md`
-2. Review architecture doc `.agent/ARCHITECTURE.md`
+2. Review architecture doc `.dev-docs/architecture/ARCHITECTURE_COMPLETE.md`
 3. Check individual package READMEs
 4. Review GitHub Actions logs
 

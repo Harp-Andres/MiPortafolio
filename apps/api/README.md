@@ -292,7 +292,7 @@ gen.generate('CV.docx')
 ## 📞 Support
 
 For issues or questions, refer to:
-- [ARCHITECTURE.md](../../.agent/ARCHITECTURE.md)
+- [ARCHITECTURE_COMPLETE.md](../../.dev-docs/architecture/ARCHITECTURE_COMPLETE.md)
 - [Backend Implementation Guide](../../docs/BACKEND_IMPLEMENTATION.md)
 
 ## 📄 License

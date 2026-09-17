@@ -188,7 +188,7 @@ uv sync  # Actualiza dependencias
 ## 📚 Documentación Adicional
 
 - **Arquitectura**: [docs/MAESTRO_SPECIFICATION.md](docs/MAESTRO_SPECIFICATION.md)
-- **Agent System**: [.agent/AGENTS.md](.agent/AGENTS.md)
+- **Agent System**: [.github/agents/](.github/agents/)
 - **Skills**: [docs/AGENT_SKILLS.md](docs/AGENT_SKILLS.md)
 - **Testing**: [docs/E2E_TESTING.md](docs/E2E_TESTING.md)
 
@@ -203,4 +203,4 @@ uv sync  # Actualiza dependencias
 
 ---
 
-**¿Preguntas?** Revisa `.agent/AGENTS.md` o abre un issue en GitHub.
+**¿Preguntas?** Revisa `.github/agents/` o abre un issue en GitHub.

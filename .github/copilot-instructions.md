@@ -11,6 +11,19 @@ Todo lo relacionado con **programación** (código fuente en cualquier lenguaje,
 This repository uses the **Maestro Agent** — a 7-layer Python agent system exposed via MCP.
 Invoke skills directly using the MCP tools registered in `.mcp.json`.
 
+## 🧠 Master delegation & skill auto-creation (always active, any mode)
+
+Regardless of which chat mode is selected, behave as the master orchestrator described in `.github/agents/agent-master-portfolio.agent.md`:
+
+1. **Delegate by domain.** Before acting, check if the task matches one of the specialized agents in `.github/agents/*.agent.md` (CV/docs, testing, deployment, CI/CD, architecture, SDET, platform, OS, setup). If it does, follow that agent's description/responsibilities as if you were it.
+2. **Reuse before creating.** Before writing new logic, check `.github/instructions/*.instructions.md` for an existing generic "skill" covering this domain and apply it.
+3. **Skills belong to their owning specialist.** A skill under `.github/skills/*/SKILL.md` is owned by whichever specialized agent declares it (see that agent's `.agent.md`). When acting as the master/orchestrator, delegate to that specialist instead of invoking the skill directly yourself. Only use a skill directly if no specialist owns that domain.
+4. **Auto-create reusable skills.** If you complete a multi-step task that is costly (≥3 tool calls or likely to repeat) and is not yet covered by an existing instructions/prompt file, propose creating one:
+   - Domain-scoped conventions that should apply automatically whenever matching files are edited → new file in `.github/instructions/<topic>.instructions.md` with an `applyTo` glob (see existing ones for the pattern).
+   - On-demand multi-step workflows invoked by name → new file in `.github/prompts/<name>.prompt.md`.
+   - Never duplicate this logic into `agent/` (the Python Maestro MCP server) unless explicitly asked — that layer is a separate system, currently not wired into Copilot Chat.
+5. **Keep it portable.** Prefer `AGENTS.md`-style plain instructions over VS Code-only mechanisms when possible, since other tools (e.g. Claude Code) may read this repo later.
+
 ---
 
 ## 🏗️ Architecture
@@ -45,7 +58,7 @@ packages/          Shared code (core, ui, api-client, config)
   - Agent/skill configuration → `.agent/` (only files with agent/skill frontmatter, not prose reports).
   - The only markdown allowed at repo root is `README.md` and a short `QUICK_START.md` stub that links to `docs/QUICK_START.md`.
 - Before finishing a task that adds new top-level files, verify they match this structure. If a new file doesn't fit an existing layer/folder, ask where it should go instead of defaulting to the repo root.
-- When moving/renaming a doc, grep the repo for old references (other docs, scripts, `.agent/AGENTS.md`) and update them so links don't break.
+- When moving/renaming a doc, grep the repo for old references (other docs, scripts, `.github/agents/*.agent.md`) and update them so links don't break.
 
 ---
 
@@ -168,7 +181,9 @@ Before major changes, consult these context files first to reduce hallucinations
 | File | Purpose |
 |------|---------|
 | `.mcp.json` | MCP server config for all IDEs (VS Code, Cursor, Claude, IntelliJ) |
-| `.agent/AGENTS.md` | Agent definitions, commands, routing rules |
+| `.github/agents/*.agent.md` | Custom Agents: master + 10 specialized agent definitions (workspace-scoped, auto-appear in the agent picker) |
+| `.github/instructions/*.instructions.md` | Generic per-role skills, auto-applied by `applyTo` glob |
+| `.github/prompts/*.prompt.md` | On-demand multi-step workflows, invoked via `/name` |
 | `agent/4_skills/base_skill.py` | Abstract base for all 28 skills |
 | `agent/4_skills/skill_registry.py` | Skill discovery and registry |
 | `agent/4_skills/skill_routing.py` | Routes tasks to correct agent/skill |

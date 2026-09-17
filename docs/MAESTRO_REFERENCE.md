@@ -404,4 +404,4 @@ handle_build_orchestrator_async(arguments) → str
 
 - Full architecture: [PHASE_1_COMPLETION.md](PHASE_1_COMPLETION.md)
 - Master specification: [MAESTRO_SPECIFICATION.md](MAESTRO_SPECIFICATION.md)
-- Agent definitions: [.agent/AGENTS.md](.agent/AGENTS.md)
+- Agent definitions: [.github/agents/](.github/agents/)

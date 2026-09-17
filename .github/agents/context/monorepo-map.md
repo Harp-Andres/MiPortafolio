@@ -13,5 +13,5 @@ Core workflows:
 Critical paths:
 - agent/1_interface: CLI and MCP server
 - agent/4_skills: skill implementations
-- .agent/AGENTS.md: hierarchy and responsibilities
+- .github/agents/*.agent.md: hierarchy and responsibilities
 - .mcp.json: MCP server registration

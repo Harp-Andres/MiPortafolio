@@ -87,4 +87,4 @@ Casos típicos:
 - Esta guía: `agent/docs/GUIA_USO_AGENTE.md`
 - Setup agent base: `agent/setup_agent.py`
 - CLI bootstrap: `agent/setup_bootstrap_cli.py`
-- Agente especializado definido: `.agent/AGENTS.md`
+- Agente especializado definido: `.github/agents/`

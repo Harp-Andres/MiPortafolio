@@ -756,14 +756,14 @@ Genera:
 
 ## 🤖 Agente de Automatización
 
-El proyecto usa el sistema **Maestro** (`@maestro`), un agente orquestador multi-nivel definido en [.agent/AGENTS.md](.agent/AGENTS.md), con agentes especializados para:
+El proyecto usa el sistema **Maestro** (`@maestro`), un agente orquestador multi-nivel definido en [.github/agents/](.github/agents/), con agentes especializados para:
 
 - **CV/Hoja de Vida**: `portfolio-cv-manager`
 - **Testing E2E/Unitario**: `portfolio-test-manager`
 - **Deployment**: `portfolio-deployment-manager`
 - **CI/CD**: `github-cicd-manager`
 
-Ver [.agent/AGENTS.md](.agent/AGENTS.md) para la jerarquía completa y [docs/MAESTRO_REFERENCE.md](docs/MAESTRO_REFERENCE.md) para la guía de uso.
+Ver [.github/agents/](.github/agents/) para la jerarquía completa y [docs/MAESTRO_REFERENCE.md](docs/MAESTRO_REFERENCE.md) para la guía de uso.
 
 ## 🔒 Consideraciones de Seguridad
 

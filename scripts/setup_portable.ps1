@@ -153,7 +153,7 @@ Write-Host "
 
 4. Para más información:
    - Lee: docs/QUICK_START.md
-   - Lee: .agent/AGENTS.md
+   - Lee: .github/agents/
    - Lee: docs/MAESTRO_SPECIFICATION.md
 
 📊 Información del Setup:

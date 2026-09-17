@@ -1,6 +1,6 @@
 ---
 name: github-cli-automation
-description: PowerShell CLI scripts for testing, building, and managing CI/CD workflows in MiPortafolio
+description: PowerShell CLI scripts for testing, building, and managing CI/CD workflows in MiPortafolio. Use when the user asks to run tests, validate/build, trigger or check GitHub Actions workflows, or create/merge pull requests via the gh CLI.
 ---
 
 # GitHub CLI Automation Skill
@@ -214,11 +214,10 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 **Branch Protection (main):**
 - 1 PR review required
-- Status checks: lint, test, build, notify
+- Status checks: lint, test-unit, test-e2e, build, notify
 - Requires up-to-date before merge
 - Enforced for admins
 - Blocks force push and deletion
 
-**CI/CD Pipeline:**
-1. install → 2. lint + test → 3. build → 4. deploy → 5. notify
-
+**CI/CD Pipeline (see `.github/workflows/deploy.yml`):**
+1. install → 2. lint + (test-unit ‖ test-e2e in parallel) → 3. build → 4. deploy (main only) → 5. notify

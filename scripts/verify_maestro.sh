@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Maestro Agent - Quick Verification Script
-# Run: bash verify_maestro.sh
+# Run: bash scripts/verify_maestro.sh
 
 echo "
 ╔═══════════════════════════════════════════════════════════════════╗
@@ -61,9 +61,9 @@ fi
 
 echo -e "\n${YELLOW}[CHECK 6/6]${NC} Verificando documentación..."
 DOCS=0
-[ -f "QUICK_START.md" ] && ((DOCS++))
+[ -f "docs/QUICK_START.md" ] && ((DOCS++))
 [ -f "STATUS_REPORT.md" ] && ((DOCS++))
-[ -f "setup_portable.ps1" ] && ((DOCS++))
+[ -f "scripts/setup_portable.ps1" ] && ((DOCS++))
 echo -e "${GREEN}✅ $DOCS documentos de guía${NC}"
 
 echo "
@@ -85,7 +85,7 @@ echo "
    cd MiPortafolio
 
 2. Ejecuta el setup automático (Windows):
-   powershell -ExecutionPolicy Bypass -File setup_portable.ps1
+   powershell -ExecutionPolicy Bypass -File scripts/setup_portable.ps1
 
 3. O manual (cualquier SO):
    cd agent
@@ -97,12 +97,12 @@ echo "
    # Presiona Ctrl+I para abrir Copilot Chat
    # Escribe: @maestro skill-unit-test-runner
 
-5. Lee QUICK_START.md para más información
+5. Lee docs/QUICK_START.md para más información
 
 📚 Documentación:
-   - QUICK_START.md       (Setup & uso)
+   - docs/QUICK_START.md       (Setup & uso)
    - STATUS_REPORT.md     (Status ejecutivo)
-   - setup_portable.ps1   (Script Windows)
+   - scripts/setup_portable.ps1   (Script Windows)
 
 💡 Features:
    ✨ 11 skills funcionales (programming, testing, build, deploy)

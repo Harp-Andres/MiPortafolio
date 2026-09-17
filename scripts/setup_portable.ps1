@@ -1,5 +1,5 @@
 # Maestro Agent - Portable Setup Script (Windows PowerShell)
-# Run: powershell -ExecutionPolicy Bypass -File setup_portable.ps1
+# Run: powershell -ExecutionPolicy Bypass -File scripts/setup_portable.ps1
 
 param(
     [switch]$SkipDependencies = $false,
@@ -152,7 +152,7 @@ Write-Host "
    @maestro skill-unit-test-runner
 
 4. Para más información:
-   - Lee: QUICK_START.md
+   - Lee: docs/QUICK_START.md
    - Lee: .agent/AGENTS.md
    - Lee: docs/MAESTRO_SPECIFICATION.md
 

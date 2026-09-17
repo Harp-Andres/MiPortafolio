@@ -1,5 +1,11 @@
 # GitHub Copilot - Portfolio Agent Instructions
 
+## 🗣️ Idioma de comunicación
+
+Responde siempre en **español** en el chat, salvo que el usuario escriba explícitamente en otro idioma.
+
+Todo lo relacionado con **programación** (código fuente en cualquier lenguaje, nombres de variables/funciones/clases, comentarios dentro del código, mensajes de commit y nombres de branches) se mantiene siempre en **inglés**, como estándar de la industria.
+
 ## 🎼 Maestro Agent System
 
 This repository uses the **Maestro Agent** — a 7-layer Python agent system exposed via MCP.
@@ -25,6 +31,21 @@ apps/
 
 packages/          Shared code (core, ui, api-client, config)
 ```
+
+---
+
+## 🧹 Project structure hygiene (enforced)
+
+- Never commit runtime artifacts: logs (`*.log`, `*.err`), `output.txt`, `summary.txt`, coverage/, dist/, playwright-report/, test-results/, `.venv/`, `.state/`, `.checkpoints/`. These must stay gitignored.
+- Reusable setup/verification/maintenance scripts belong in `scripts/` (see `scripts/README.md`), never loose at the repo root. Repo-root `.ps1`/`.sh` files are only acceptable if they are one-off, throwaway, and never committed.
+- The `agent/` root only holds package metadata (`pyproject.toml`, `uv.lock`, `README.md`, `__init__.py`, `.env.example`) and the bootstrap/setup CLI entry points (`setup_agent.py`, `setup_bootstrap_cli.py`, `phase2_setup_agent.py`). All runtime logic lives inside the numbered layer folders (`1_interface/` … `7_state/`).
+- **Never create markdown documentation directly at the repo root.** Follow `docs/DOCUMENTATION_GUIDE.md`:
+  - End-user/external docs → `docs/` (e.g. `docs/QUICK_START.md`, `docs/SETUP.md`, `docs/MAESTRO_REFERENCE.md`).
+  - Internal analysis, session summaries, phase reports → `.dev-docs/` (e.g. `.dev-docs/architecture/`, `.dev-docs/sessions/`).
+  - Agent/skill configuration → `.agent/` (only files with agent/skill frontmatter, not prose reports).
+  - The only markdown allowed at repo root is `README.md` and a short `QUICK_START.md` stub that links to `docs/QUICK_START.md`.
+- Before finishing a task that adds new top-level files, verify they match this structure. If a new file doesn't fit an existing layer/folder, ask where it should go instead of defaulting to the repo root.
+- When moving/renaming a doc, grep the repo for old references (other docs, scripts, `.agent/AGENTS.md`) and update them so links don't break.
 
 ---
 

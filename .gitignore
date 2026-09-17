@@ -51,4 +51,9 @@ build
 agent/.checkpoints/
 agent/.state/
 agent/.venv/
+agent/*.log
+agent/*.err
+agent/output.txt
+agent/summary.txt
+workflow_log.txt
 

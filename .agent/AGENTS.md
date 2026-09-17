@@ -7,6 +7,8 @@ agents:
     type: master
     description: "Master agent that orchestrates all portfolio operations. Central command center for portfolio management, validation, and deployment."
     parent: null
+    language: es
+    communicationStyle: "Responder siempre en español en el chat, salvo que el usuario escriba en otro idioma. Código, commits y comentarios técnicos en inglés."
     children:
       - portfolio-cv-manager
       - portfolio-test-manager
@@ -33,6 +35,8 @@ agents:
       - Provide status overview of all systems
       - Escalate issues to appropriate specialized agents
       - Rollback failed deployments
+      - Enforce project structure hygiene (see structurePolicy below)
+    structurePolicy: "Never commit runtime artifacts (*.log, *.err, output.txt, summary.txt, coverage/, dist/, playwright-report/, .venv/, .state/, .checkpoints/) — keep them gitignored. Reusable scripts belong in scripts/, never loose at repo root. agent/ root only holds package metadata and setup/bootstrap CLI entry points; runtime logic stays inside 1_interface/ … 7_state/. Never create markdown docs at repo root: end-user docs go in docs/, internal analysis/reports go in .dev-docs/, agent/skill config goes in .agent/ (see docs/DOCUMENTATION_GUIDE.md). Only README.md and a QUICK_START.md stub linking to docs/QUICK_START.md may live at repo root. New top-level files must fit an existing layer/folder or the user must be asked where they belong. When moving/renaming a doc, grep for and fix old references."
     dependencies: []
     toolRestrictions:
       - Allowed: execution_subagent, grep_search, file_search, read_file, run_in_terminal
